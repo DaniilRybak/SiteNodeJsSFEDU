@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://api-maps.yandex.ru/2.1/?apikey=d1ebd746-8548-4cce-b6fb-31f1c129cba8&lang=ru_RU" type="text/javascript">
+        </script>
+    </head>
+
+    <title>ETB</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="images for index.html/icon.png" >
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <style>
+            /* CSS стили для всплывающей подсказки */
+            .bin-info {
+            position: fixed;
+            left: 0;
+            /* Убираем 'top: 0' */ 
+            bottom: 0; /* Фиксируем к низу */
+            width: 500px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            /* Добавляем отступ сверху, равный высоте шапки + небольшой запас */
+            top: 75px; /* Замените 80px на фактическую высоту вашей шапки + запас */
+            }
+
+            
+            .bin-info button {
+            position: absolute;
+            bottom: 10px; /* Отступ от нижнего края */
+            left: 50%; /* Центрируем по горизонтали */
+            transform: translateX(-50%); /* Дополнительное центрирование */
+            width: 90%; /* Ширина кнопки */
+            background-color: #f44336;
+            color: white;
+            padding: 10px 0;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 0;
+            }
+
+            /* Стили для всплывающего окна */
+            #route-alert {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 400px;
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                display: none;
+                z-index: 100;
+            }
+
+            #route-alert h2 {
+                color: #f44336;
+                margin-bottom: 10px;
+            }
+
+            #route-alert button {
+                background-color: #f44336;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-top: 10px;
+            }
+          </style>
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div id="logo"> <!--Лого компании-->
+                <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="200px" heght="100px">
+            </div>
+            <div id="links"> <!--навигационные кнопки, обёрнутые в ссылки-->
+                <a href=""><button class="navigation">Map</button></a>
+                <a href=""><button class="navigation">Routes</button></a>
+                <a href=""><button class="navigation">Reports</button></a>
+                <a href=""><button class="navigation">Settings</button></a>
+            </div>
+            <div id="userpanel"> <!--фото пользователя и кнопка "домой"-->
+                <img src="images for index.html/user_avatar.png" alt="" width="70px" height="70px">
+                <a href=""><button class="navigation" id="homepage">Back Home</button></a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="map" style="width: 100vw; height: 100vh"></div>
+        <div id="bin-info" class="bin-info">
+            <canvas id="fullnessChart" width="100" height="100"></canvas>
+            <canvas id="chargeChart" width="100" height="100"></canvas>
+            <!-- Информация о баке будет отображаться здесь -->
+        </div>
+
+        <div id="route-alert">
+            <h2>Внимание!</h2>
+            <p id="alert-message"></p> <div id="low-charge-alert" style="display: none;"> 
+            <p>Обнаружены датчики с низким зарядом батареи.</p>
+            <button onclick="closeLowChargeAlert()">Закрыть</button>
+        </div> 
+            <button onclick="closeRouteAlert()">Продолжить</button>
+        </div>
+
+
+        <script type="text/javascript">
+
+            function createChart(canvasId, percent) {
+                var ctx = document.getElementById(canvasId).getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                    datasets: [{
+                    data: [percent, 100 - percent], // Данные для диаграммы
+                    backgroundColor: ['#4CAF50', '#f44336'] // Цвета сегментов
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 70, // Размер отверстия в центре
+                    responsive: false, // Отключаем адаптивность
+                    legend: {
+                        display: false // Скрываем легенду
+                    },
+                    tooltips: {
+                        enabled: false // Отключаем всплывающие подсказки
+                    }
+                }
+                });
+            }
+
+            function showRouteAlert(message = '') {
+                document.getElementById('alert-message').innerText = message;
+                document.getElementById('route-alert').style.display = 'block';
+            }
+
+            function closeRouteAlert() {
+                document.getElementById('route-alert').style.display = 'none';
+            }
+
+            let myMap;  // Объявляем myMap здесь, чтобы она была доступна в других функциях
+            let clusterer; // Объявляем clusterer здесь, чтобы он был доступен в других функциях
+            let mapInitialized = false; 
+            let placemarkColors = [
+                '#4CAF50', // Зеленый
+                '#f44336', // Красный
+                '#FFA500' // Оранжевый
+            ];
+
+            function init() {
+                myMap = new ymaps.Map("map", {
+                    center: [47.214758, 38.914220], // Ваши координаты
+                    zoom: 14 // Начальный зум
+                }, {
+                    searchControlProvider: 'yandex#search' // Добавляем поиск на карту
+                });
+
+                clusterer = new ymaps.Clusterer({
+                    clusterIconLayout: 'default#pieChart',
+                    clusterIconPieChartRadius: 25,
+                    clusterIconPieChartCoreRadius: 10,
+                    clusterIconPieChartStrokeWidth: 3,
+                    hasBalloon: false
+                });
+
+                updateMapData(); // Первоначальная загрузка данных
+
+                // Обновляем данные каждые 10 секунд (10000 миллисекунд)
+                setInterval(updateMapData, 10000); 
+
+                // Обработчик клика на карту (для скрытия подсказки)
+                myMap.events.add('click', function () {
+                    closeBinInfo(); 
+                });
+            }
+
+            ymaps.ready(init);
+
+            function updateMapData() {
+                fetch('/api/bins')
+                    .then(response => response.json())
+                    .then(data => {
+                    let fullBinsCount = 0;
+                    let lowChargeCount = 0;
+                    let geoObjects = [];
+
+                    // Очищаем карту от старых объектов
+                    myMap.geoObjects.remove(clusterer);
+                    clusterer.removeAll(); 
+
+                    // Обработка каждого мусорного бака
+                    data.forEach(bin => {
+                        let iconColor;
+
+                        // Определение цвета маркера
+                        if (bin.chargeLevel < 20) {
+                        iconColor = placemarkColors[2]; // Оранжевый, если низкий заряд
+                        lowChargeCount++;
+                        } else {
+                        iconColor = bin.fullness > 80 ? placemarkColors[1] : placemarkColors[0]; // Красный/Зеленый
+                        }
+
+                        // Подсчет заполненных баков
+                        if (bin.fullness > 80) {
+                        fullBinsCount++;
+                        }
+
+                        // Создание маркера
+                        var marker = new ymaps.Placemark([bin.latitude, bin.longitude], {}, {
+                        iconColor: iconColor
+                        });
+
+                        // Обработчик клика на маркер
+                        marker.events.add('click', function () {
+                        document.getElementById('bin-info').style.display = 'block';
+                        document.getElementById('bin-info').innerHTML = `
+                            <h2>Контейнер номер: ${bin.serial_number}</h2>
+                            <div style="display: flex; gap: 40px;">
+                            <div style="margin-right: 20px;">
+                                <canvas id="fullnessChart" width="100" height="100"></canvas>
+                                <p>Наполненность: ${bin.fullness}%</p>
+                                ${bin.fullness > 80 ? '<p style="color: red;">Контейнер заполнен!</p>' : ''} 
+                            </div>
+                            <div>
+                                <canvas id="chargeChart" width="100" height="100"></canvas>
+                                <p>Заряд: ${bin.chargeLevel}%</p>
+                                ${bin.chargeLevel < 20 ? '<p style="color: orange;">Требуется зарядка датчика!</p>' : ''} 
+                            </div>
+                            </div>
+                            <button onclick="closeBinInfo()">Закрыть</button>
+                        `;
+                        createChart('fullnessChart', 100 - bin.fullness);
+                        createChart('chargeChart', bin.chargeLevel);
+                        });
+
+                        // Добавление маркера в кластер
+                        geoObjects.push(marker);
+                        clusterer.add(marker);
+                    });
+
+                    // Логика для показа уведомлений
+                    if (fullBinsCount >= 10 && lowChargeCount > 0) {
+                        showRouteAlert(`Достаточное количество контейнеров заполнены. Необходимо выехать на маршрут для сбора мусора.\n\nНужна зарядка батарей в ${lowChargeCount} датчиках.`);
+                    } else if (fullBinsCount >= 10) {
+                        showRouteAlert('Достаточное количество контейнеров заполнены. Необходимо выехать на маршрут для сбора мусора.');
+                    } else if (lowChargeCount > 0) {
+                        showRouteAlert(`Необходимо зарядка батареи в ${lowChargeCount} датчиках.`);
+                    }
+
+                    // Добавляем кластер на карту
+                    myMap.geoObjects.add(clusterer);
+
+                    // Установка границ карты (только один раз)
+                    if (!mapInitialized) {
+                        myMap.setBounds(clusterer.getBounds(), { checkZoomRange: true });
+                        mapInitialized = true; 
+                    }
+                    })
+                    .catch(error => console.error('Ошибка при получении данных:', error));
+                }
+
+            function closeBinInfo() {
+                document.getElementById('bin-info').style.display = 'none';
+            }
+        </script>
+
+    </main>
+    <footer>
+        <!--Подвал сайта(информация об авторах, год создания и т.д.)-->
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "untitled",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "chart.js": "^4.4.3",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.10.0",
+    "parcel-bundler": "^1.6.1"
+  },
+  "scripts": {}
+}

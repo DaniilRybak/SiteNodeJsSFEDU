@@ -1,0 +1,28 @@
+header{
+   background-color:rgb(54,53,59);
+   display: flex;
+}
+.navigation{
+    background-color:rgb(54,53,59);
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+a{
+    text-decoration: none !important;
+}
+.container{
+    display: flex;
+}
+#logo{
+    flex-grow: 3;
+    align-content: center;
+    margin-top: 8px;
+}
+#links{
+    flex-grow: 2;
+    margin-top: 16px;
+}
+body {
+    overflow: hidden;
+}
