@@ -59,7 +59,7 @@ app.put('/api/bins/:id', (req, res) => {
     res.json({ message: 'Данные успешно обновлены' });
   });
 });
-//gds
+//gdsf
 app.listen(3000, () => {
   console.log('Сервер запущен на порту 3000');
 });
