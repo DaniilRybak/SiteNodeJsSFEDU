@@ -26,7 +26,7 @@ connection.connect(error => {
 
 app.use(express.static('public'));
 app.use(express.json()); // Для парсинга JSON в теле запроса
-//в
+
 // Главная страница с картой
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/map.html');
