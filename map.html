@@ -18,87 +18,21 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-        <style>
-            /* CSS стили для всплывающей подсказки */
-            .bin-info {
-            position: fixed;
-            left: 0;
-            /* Убираем 'top: 0' */ 
-            bottom: 0; /* Фиксируем к низу */
-            width: 500px;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            display: none;
-            /* Добавляем отступ сверху, равный высоте шапки + небольшой запас */
-            top: 75px; /* Замените 80px на фактическую высоту вашей шапки + запас */
-            }
-
-            
-            .bin-info button {
-            position: absolute;
-            bottom: 10px; /* Отступ от нижнего края */
-            left: 50%; /* Центрируем по горизонтали */
-            transform: translateX(-50%); /* Дополнительное центрирование */
-            width: 90%; /* Ширина кнопки */
-            background-color: #f44336;
-            color: white;
-            padding: 10px 0;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            border-radius: 0;
-            }
-
-            /* Стили для всплывающего окна */
-            #route-alert {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 400px;
-                background-color: white;
-                padding: 20px;
-                border-radius: 5px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-                display: none;
-                z-index: 100;
-            }
-
-            #route-alert h2 {
-                color: #f44336;
-                margin-bottom: 10px;
-            }
-
-            #route-alert button {
-                background-color: #f44336;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-top: 10px;
-            }
-          </style>
-
 </head>
 
 <body>
     <header>
         <div class="container">
             <div id="logo"> <!--Лого компании-->
-                <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="200px" heght="100px">
+                <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="200px" height="60px"></a>
             </div>
             <div id="links"> <!--навигационные кнопки, обёрнутые в ссылки-->
                 <a href=""><button class="navigation">Map</button></a>
                 <a href=""><button class="navigation">Routes</button></a>
-                <a href=""><button class="navigation">Reports</button></a>
                 <a href=""><button class="navigation">Settings</button></a>
             </div>
             <div id="userpanel"> <!--фото пользователя и кнопка "домой"-->
-                <img src="images for index.html/user_avatar.png" alt="" width="70px" height="70px">
-                <a href=""><button class="navigation" id="homepage">Back Home</button></a>
+                <a href="/login"> <img src="images for index.html/user_avatar.png" alt="" width="70px" height="70px"></a>
             </div>
         </div>
     </header>

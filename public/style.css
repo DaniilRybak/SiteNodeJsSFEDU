@@ -1,28 +1,108 @@
-header{
-   background-color:rgb(54,53,59);
-   display: flex;
-}
-.navigation{
-    background-color:rgb(54,53,59);
+header {
+    background-color: rgb(54, 53, 59);
+    display: flex;
+  }
+  
+  .container {
+    display: flex;
+    align-items: center; /* Выравниваем элементы по вертикали по центру */
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    padding: 0px 20px;
+  }
+  
+  #logo {
+    margin-top: 0; /* Убираем лишний margin */
+  }
+  
+  #links {
+    flex-grow: 0; 
+    margin-top: 0; 
+    display: flex;  
+    gap: 20px; 
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    align-items: center;    /* Центрируем элементы по вертикали */
+  }
+  
+  #userpanel {
+    margin-top: 0; /* Убираем лишний margin */
+  }
+  
+  .navigation {
+    background-color: rgb(54, 53, 59);
     border-radius: 5px;
     border: none;
     color: white;
-}
-a{
+    padding: 10px 15px; /*  */
+    font-family: 'Arial', sans-serif; /* Пример: меняем шрифт на Arial */
+  }
+  
+  a {
     text-decoration: none !important;
-}
-.container{
-    display: flex;
-}
-#logo{
-    flex-grow: 3;
-    align-content: center;
-    margin-top: 8px;
-}
-#links{
-    flex-grow: 2;
-    margin-top: 16px;
-}
-body {
-    overflow: hidden;
-}
+  }
+  
+  body {
+    overflow: hidden; 
+  }
+/* CSS стили для всплывающей подсказки */
+.bin-info {
+    position: fixed;
+    left: 0;
+    /* Убираем 'top: 0' */ 
+    bottom: 0; /* Фиксируем к низу */
+    width: 500px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    /* Добавляем отступ сверху, равный высоте шапки + небольшой запас */
+    top: 75px; /* Замените 80px на фактическую высоту вашей шапки + запас */
+    }
+
+    
+    .bin-info button {
+    position: absolute;
+    bottom: 10px; /* Отступ от нижнего края */
+    left: 50%; /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Дополнительное центрирование */
+    width: 90%; /* Ширина кнопки */
+    background-color: #f44336;
+    color: white;
+    padding: 10px 0;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 0;
+    }
+
+    /* Стили для всплывающего окна */
+    #route-alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 100;
+    }
+
+    #route-alert h2 {
+        color: #f44336;
+        margin-bottom: 10px;
+    }
+
+    #route-alert button {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+
+    
