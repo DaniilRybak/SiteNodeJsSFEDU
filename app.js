@@ -2,11 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mysql = require('mysql2');
-
-const bcrypt = require('bcrypt'); // Для хеширования паролей
 const crypto = require('crypto');
-
-// Импорт модуля для управления сессиями
 const session = require('express-session');
 
 
@@ -108,15 +104,13 @@ app.post('/login', async (req, res) => {
     // Создание сессии для залогиненного пользователя
     req.session.username = username;
     res.json({ message: 'Успешный вход' });
-    console.log(username);
   });
 });
 
 // Проверка авторизации для доступа к специальным функциям
 const isLoggedIn = (req, res, next) => {
   if (!req.session.username) {
-    res.status(401).json({ error: 'Требуется авторизация' });
-    return;
+    return res.redirect('/'); 
   }
   next();
 };
@@ -126,6 +120,11 @@ const isLoggedIn = (req, res, next) => {
 app.get('/map', isLoggedIn, (req, res) => {
   
   res.sendFile(__dirname + '/map.html');
+});
+
+app.get('/geo', isLoggedIn, (req, res) => {
+  
+  res.sendFile(__dirname + '/Geolocathion.html');
 });
 
 // Новый маршрут для проверки авторизации
