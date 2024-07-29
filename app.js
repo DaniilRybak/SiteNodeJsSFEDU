@@ -20,9 +20,9 @@ app.use(session({
 // Настройки подключения к базе данных
 const dbConfig = {
   host: 'localhost',
-  user: 'root',
+  user: 'admin',
   port: '3306',
-  password: '1234',
+  password: 'password',
   database: 'trash_bins'
 };
 

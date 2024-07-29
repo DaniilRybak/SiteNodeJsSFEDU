@@ -8,9 +8,24 @@
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
+    "git": "^0.1.5",
     "mysql": "^2.18.1",
     "mysql2": "^3.10.1",
+    "node": "^20.16.0",
     "parcel-bundler": "^1.6.1"
   },
-  "scripts": {}
+  "scripts": {},
+  "description": "��#\u0000 \u0000M\u0000y\u0000F\u0000i\u0000r\u0000s\u0000t\u0000S\u0000i\u0000t\u0000e\u0000\r\u0000 \u0000",
+  "main": "Geolocathion.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaniilRybak/MyFirstSite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaniilRybak/MyFirstSite/issues"
+  },
+  "homepage": "https://github.com/DaniilRybak/MyFirstSite#readme"
 }
