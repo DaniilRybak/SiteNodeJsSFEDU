@@ -44,7 +44,7 @@ li{
     align-items: center;    /* Центрируем элементы по вертикали */
     justify-content: space-around;
     text-align: center;
-    width: 100%;
+    width: auto;
   }
   
   #links {

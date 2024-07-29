@@ -1,19 +1,6 @@
-header {
-    background-color: rgb(54, 53, 59);
-    display: flex;
-  }
-
 main{
   display: flex;
 }
-  
-  .container {
-    display: flex;
-    position: relative; 
-    align-items: right; /* Выравниваем элементы по вертикали по центру */
-    justify-content: space-between; /* Распределяем пространство между элементами */
-    padding: 0px 20px;
-  }
 
   .text-container {
     width: auto; 
@@ -44,21 +31,25 @@ main{
     }
   }
   
-  #logo {
-    margin-top: 0; /* Убираем лишний margin */
+  header {
+    background-color: rgb(54, 53, 59);
+  }
+
+  .container {
+    display: flex;
+    align-items: center;    /* Центрируем элементы по вертикали */
+    justify-content: space-around;
+    text-align: center;
+    width: 100%;
   }
   
   #links {
-    flex-grow: 0; 
-    margin-top: 0; 
-    display: flex;  
+    display: flex;
     gap: 20px;
-    justify-content: center; /* Центрируем элементы по горизонтали */
-    align-items: center;    /* Центрируем элементы по вертикали */
   }
-  
-  #userpanel {
-    margin-top: 0; /* Убираем лишний margin */
+
+  #userpanel{
+    width: 200px;
   }
   
   .navigation {
