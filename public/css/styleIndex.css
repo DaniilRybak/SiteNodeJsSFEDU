@@ -1,0 +1,89 @@
+header {
+    background-color: rgb(54, 53, 59);
+    display: flex;
+  }
+
+main{
+  display: flex;
+}
+
+li{
+  text-align: left;
+}
+  
+  .container {
+    display: flex;
+    position: relative; 
+    align-items: right; /* Выравниваем элементы по вертикали по центру */
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    padding: 0px 20px;
+  }
+
+  .text-container {
+    width: auto; 
+    height: 200px; 
+    /*overflow: hidden; */
+
+    /* Центрирование на экране */
+    position: absolute;  /* Позиционируем относительно окна браузера */
+    top: 35%;            /* Сдвигаем вниз на 50% от верха окна */
+    left: 50%;           /* Сдвигаем вправо на 50% от левого края окна */
+    transform: translate(-50%, -50%); /* Сдвигаем на половину собственной ширины и высоты */
+}
+  
+  .fading-text {
+    display: block; /* Занимаем всю ширину контейнера */
+    text-align: center; /* Выравнивание текста по центру */
+    animation: fadeInOut 5s linear infinite; /* Анимация смены текста */
+  }
+  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0; /* Текст невидимый в начале и в конце */
+      transform: translateY(10px); /* Текст немного смещен вниз */
+    }
+    20%, 80% {
+      opacity: 1; /* Текст полностью видимый */
+      transform: translateY(0); /* Текст на месте */
+    }
+  }
+  
+  #logo {
+    margin-top: 0; /* Убираем лишний margin */
+  }
+  
+  #links {
+    flex-grow: 0; 
+    margin-top: 0; 
+    display: flex;  
+    gap: 20px;
+    justify-content: center; /* Центрируем элементы по горизонтали */
+    align-items: center;    /* Центрируем элементы по вертикали */
+  }
+  
+  #userpanel {
+    margin-top: 0; /* Убираем лишний margin */
+  }
+  
+  .navigation {
+    background-color: rgb(54, 53, 59);
+    border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 10px 15px; /*  */
+    font-family: 'Arial', sans-serif; /* Пример: меняем шрифт на Arial */
+  }
+  
+  a {
+    text-decoration: none !important;
+  }
+  
+
+    #background-container {
+      background-image: url('1667397567_5-celes-club-p-fon-dlya-prezentatsii-po-ekologii-oboi-5.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: fixed; /* фиксируем фон */
+      width: 100%;
+      height: 100%;
+    }
