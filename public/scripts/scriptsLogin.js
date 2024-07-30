@@ -9,11 +9,13 @@ fetch('/isLoggedIn', {
         document.getElementById('mapButton').style.display = 'block';
         document.getElementById('routesButton').style.display = 'block';
         document.getElementById('settingsButton').style.display = 'block';
+        document.getElementById('SignInAdmin').style.display = 'none';
     } else {
         // Пользователь не авторизован, скрываем кнопку
         document.getElementById('mapButton').style.display = 'none';
         document.getElementById('routesButton').style.display = 'none';
         document.getElementById('settingsButton').style.display = 'none';
+        document.getElementById('SignInAdmin').style.display = 'block';
     }
 })
 .catch(error => {

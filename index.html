@@ -20,12 +20,17 @@
                 <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="200px" height="60px"></a>
             </div>
             <div id="links"> <!--навигационные кнопки, обёрнутые в ссылки-->
-                <a href="/map"><button class="navigation" id="mapButton">Map</button></a>
-                <a href="/"><button class="navigation" id="routesButton">Routes</button></a>
-                <a href="/"><button class="navigation" id="settingsButton">Settings</button></a>
+                <a href="/map"><button class="navigation" id="mapButton" style="display: none;">Map</button></a>
+                <a href="/"><button class="navigation" id="routesButton" style="display: none;">Routes</button></a>
+                <a href="/"><button class="navigation" id="settingsButton" style="display: none;">Settings</button></a>
             </div>
             <div id="userpanel"> <!--фото пользователя и кнопка "домой"-->
-                <a href="/login"> <img src="images for index.html/user_avatar.png" alt="" width="70px" height="70px"></a>
+                <div>
+                    <a href="/login"><button class="navigation" id="SignInAdmin">Sign in</button></a>
+                </div>
+                <div> 
+                    <a href="/login"><img src="images for index.html/user_avatar.png" alt="" width="70px" height="70px"></a>
+                </div>
             </div>
         </div>
     </header>
