@@ -36,10 +36,16 @@ main{
     height: 70px;
   }
 
+  @media (min-width: 1440px) {
+    .page-header--blog .container {
+      max-width: 1920px;
+    }
+  }
+
   .container {
     display: flex;
     align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
   }
   

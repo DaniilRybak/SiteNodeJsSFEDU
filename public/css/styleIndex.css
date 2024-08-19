@@ -40,10 +40,16 @@ li{
     height: 70px;
   }
 
+  @media (min-width: 1440px) {
+    .page-header--blog .container {
+      max-width: 1920px;
+    }
+  }
+
   .container {
     display: flex;
     align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: space-around;
+    justify-content: space-between;
     width: auto;
   }
   
@@ -78,7 +84,7 @@ li{
 
     #background-container {
       background-image: url('1667397567_5-celes-club-p-fon-dlya-prezentatsii-po-ekologii-oboi-5.jpg');
-      background-repeat: no-repeat;
+
       background-size: cover;
       position: fixed; /* фиксируем фон */
       width: 100%;
