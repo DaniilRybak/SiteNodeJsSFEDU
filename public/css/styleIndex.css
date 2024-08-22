@@ -6,38 +6,29 @@ li{
   text-align: left;
 }
 
-  .text-container {
-    width: auto; 
-    height: 200px; 
-    /*overflow: hidden; */
+.narrow-text {
+  max-width: 50%; /* Устанавливаем максимальную ширину текста, например, 50% от родительского контейнера */
+  margin: 0 auto; /* Центрируем текст по горизонтали */
+}
 
-    /* Центрирование на экране */
-    position: absolute;  /* Позиционируем относительно окна браузера */
-    top: 35%;            /* Сдвигаем вниз на 50% от верха окна */
-    left: 50%;           /* Сдвигаем вправо на 50% от левого края окна */
-    transform: translate(-50%, -50%); /* Сдвигаем на половину собственной ширины и высоты */
+body{
+  background-image: url('1667397567_5-celes-club-p-fon-dlya-prezentatsii-po-ekologii-oboi-5.jpg');
+  background-size: cover;
 }
   
   .fading-text {
     display: block; /* Занимаем всю ширину контейнера */
     text-align: center; /* Выравнивание текста по центру */
-    animation: fadeInOut 5s linear infinite; /* Анимация смены текста */
-  }
-  
-  @keyframes fadeInOut {
-    0%, 100% {
-      opacity: 0; /* Текст невидимый в начале и в конце */
-      transform: translateY(10px); /* Текст немного смещен вниз */
-    }
-    20%, 80% {
-      opacity: 1; /* Текст полностью видимый */
-      transform: translateY(0); /* Текст на месте */
-    }
   }
   
   header {
     background-color: rgb(54, 53, 59);
     height: 70px;
+  }
+
+  footer{
+    background-color: rgb(54, 53, 59);
+    height: auto;
   }
 
   @media (min-width: 1440px) {
@@ -51,6 +42,14 @@ li{
     align-items: center;    /* Центрируем элементы по вертикали */
     justify-content: space-between;
     width: auto;
+  }
+
+  #container-section{
+    display: flex;
+    align-items: center;    /* Центрируем элементы по вертикали */
+    justify-content: space-between;
+    width: auto;
+    flex-direction: column;
   }
   
   #links {
@@ -80,13 +79,101 @@ li{
     text-decoration: none !important;
   }
 
+  .text-container {
+    width: auto;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px; /* Отступ сверху */
+    margin-bottom: 300px; /* Отступ снизу */
+  }
   
+  .container-form {
+    background-color: rgba(255, 255, 255, 0.5); 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 95%; 
+    margin: 0 auto 20px; /* Added bottom margin */
+    margin-top: 20px;
+  }
+    
+  #contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input, textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
 
-    #background-container {
-      background-image: url('1667397567_5-celes-club-p-fon-dlya-prezentatsii-po-ekologii-oboi-5.jpg');
-
-      background-size: cover;
-      position: fixed; /* фиксируем фон */
-      width: 100%;
-      height: 100%;
-    }
+  #submit-form{
+    width: 200px;
+  }
+  
+  .contact-form .form-control {
+    border-radius: 5px;
+  }
+  
+  .page-footer {
+    background-color: rgb(54, 53, 59);
+    color: #fff;
+    padding: 40px 0;
+  }
+  
+  .contact-list li {
+    list-style: none;
+    margin-bottom: 10px;
+  }
+  
+  .contact-list i {
+    margin-right: 10px;
+  }
+  
+  .social-links li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .social-links a {
+    color: #fff;
+    font-size: 24px;
+  }
+  
+  .copyright {
+    text-align: center;
+    margin-top: 20px;
+  }

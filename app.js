@@ -20,9 +20,9 @@ app.use(session({
 // Настройки подключения к базе данных
 const dbConfig = {
   host: 'localhost',
-  user: 'admin',
+  user: 'root',
   port: '3306',
-  password: 'password',
+  password: '1234',
   database: 'trash_bins'
 };
 
@@ -136,7 +136,6 @@ app.get('/isLoggedIn', (req, res) => {
     res.status(401).send(); // Отправляем ошибку 401, если пользователь не авторизован
   }
 });
-
 
 app.listen(3000, () => {
   console.log('Сервер запущен на порту 3000');
