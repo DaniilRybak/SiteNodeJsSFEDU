@@ -66,10 +66,16 @@ main{
     border-radius: 5px;
     border: none;
     color: white;
-    padding: 10px 15px; /*  */
-    font-family: "Noto Sans", sans-serif; /* Пример: меняем шрифт на Arial */
+    font-family: "Noto Sans", sans-serif;
     font-weight: 600;
     font-size: 17px;
+    margin: 0 20px 0 20px;
+    transition: all 0.3s ease; /* Плавная анимация */
+}
+
+  .navigation:hover {
+    background-color: rgb(49, 49, 53); /* Замените на желаемый цвет */
+    transform: translateY(-2px); /* Небольшое смещение вверх при наведении */
   }
   
   a {
@@ -116,13 +122,13 @@ main{
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 400px;
+        width: 30%;
         background-color: white;
         padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         display: none;
-        z-index: 100;
+        z-index: 99;
     }
 
     #route-alert h2 {
@@ -139,3 +145,85 @@ main{
         cursor: pointer;
         margin-top: 10px;
     }
+
+    /* Стили для кнопки "гамбургера" */
+.hamburger-button {
+  filter: invert(1);
+  display: none; /* По умолчанию скрываем кнопку на больших экранах */
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Плавная анимация */
+}
+
+.hamburger-button:hover{
+  background-color: rgb(49, 49, 53); /* Замените на желаемый цвет */
+  transform: translateY(-2px); /* Небольшое смещение вверх при наведении */
+}
+
+/* Стили для навигации */
+.navbar-collapse {
+  display: flex; 
+  align-items: center; 
+}
+
+/* Стили для кнопок */
+.navigation {
+  /* ... ваши стили для кнопок ... */
+  margin-left: 20px; /* Отступ между кнопками */
+}
+
+/* Стили для профиля пользователя */
+#userpanel {
+  display: flex;
+  align-items: center; 
+  margin-left: 20px; /* Отступ от кнопок */
+}
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) { 
+  .hamburger-button {
+    display: block; /* Показываем кнопку на маленьких экранах */
+  }
+
+  #route-alert{
+    width: 85%;
+  }
+
+  #SignInAdmin1 {
+    display: block;
+  }
+
+  #links,
+  #userpanel {
+    display: none; /* Скрываем кнопки */
+    /* НОВЫЙ CSS: добавляем стили для отображения меню при нажатии на кнопку */
+    position: absolute; 
+    top: 70px; /* Позиционируем меню под шапкой */
+    right: 0; 
+    width: auto; 
+    background-color: rgb(54, 53, 59);
+    flex-direction: column; /* Располагаем элементы меню вертикально */
+    z-index: 100;
+    transition: transform 0.3s ease-in-out; /* Добавляем плавную анимацию */
+  }
+
+  /* НОВЫЙ CSS: показываем меню, когда у #links есть класс show */
+  #links.show {
+    display: flex;
+    justify-content: center; /* Центрирует элементы по горизонтали */
+    align-items: center; /* Центрирует элементы по вертикали (опционально) */
+    border-bottom-left-radius: 5px; /* Радиус скругления для нижнего левого угла */
+    border-bottom-right-radius: 5px; /* Радиус скругления для нижнего правого угла */
+  }
+
+  .navigation, #userpanel > div {
+    margin-bottom: 10px; /* Отступ между элементами меню */
+  }
+}
+
+@media (min-width: 768px) { /* Или другое значение ширины экрана */
+  #SignInAdmin1 {
+    display: none;
+  }
+}

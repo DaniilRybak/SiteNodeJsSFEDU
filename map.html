@@ -24,12 +24,22 @@
     <header class="page-header  page-header--blog">
         <div class="container">
             <div id="logo"> <!--Лого компании-->
-                <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="200px" height="60px"></a>
+                <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="230px" height="60px"></a>
             </div>
+            
+            <button class="hamburger-button">
+                <img src="images for index.html/listing.png" alt="Меню" width="45px" height="45px"> 
+            </button>
+
             <div id="links"> <!--навигационные кнопки, обёрнутые в ссылки-->
-                <a href=""><button class="navigation">Map</button></a>
-                <a href=""><button class="navigation">Routes</button></a>
-                <a href=""><button class="navigation">Settings</button></a>
+                <a href="/"><button class="navigation" style="display: none;"></button></a>
+
+                <a href="#information-project"><button class="navigation" id="OurInfo" style="display: none;">О нас</button></a>
+                <a href="/map"><button class="navigation" id="mapButton">Карта</button></a>
+                <a href="#contact-form"><button class="navigation" id="ObrCall" style="display: none;">Обратная связь</button></a>
+                <a href="/"><button class="navigation" id="routesButton">Маршруты</button></a>
+                <a href="#footer-teleport"><button class="navigation" id="Contact-info" style="display: none;">Контакты</button></a>
+                <a href="/login"><button class="navigation" id="SignInAdmin1">Логин</button></a>
             </div>
             <div id="userpanel"> <!--фото пользователя и кнопка "домой"-->
                 <div> 
@@ -217,6 +227,20 @@
             }
 
 
+            window.addEventListener('resize', function() {
+            if (window.innerWidth < 768) { // Замените 768 на желаемую ширину
+                window.scrollTo(0, 0);
+            }
+            });
+
+
+            // Обработчик клика на кнопку "гамбургера"
+            const hamburgerButton = document.querySelector('.hamburger-button');
+            const links = document.getElementById('links'); // получаем элемент #links
+
+            hamburgerButton.addEventListener('click', () => {
+            links.classList.toggle('show'); // переключаем класс 'show' у #links
+            });
         </script>
 
     </main>

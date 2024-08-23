@@ -21,16 +21,26 @@
     <header class="page-header  page-header--blog">
         <div class="container">
             <div id="logo"> <!--Лого компании-->
-                <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="200px" height="60px"></a>
+                <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="230px" height="60px"></a>
             </div>
+
+            <button class="hamburger-button">
+                <img src="images for index.html/listing.png" alt="Меню" width="45px" height="45px"> 
+            </button>
+
             <div id="links"> <!--навигационные кнопки, обёрнутые в ссылки-->
-                <a href="/map"><button class="navigation" id="mapButton" style="display: none;">Map</button></a>
-                <a href="/"><button class="navigation" id="routesButton" style="display: none;">Routes</button></a>
-                <a href="/"><button class="navigation" id="settingsButton" style="display: none;">Settings</button></a>
+                <a href="/"><button class="navigation" style="display: none;"></button></a>
+                
+                <a href="#information-project"><button class="navigation" id="OurInfo">О нас</button></a>
+                <a href="/map"><button class="navigation" id="mapButton" style="display: none;">Карта</button></a>
+                <a href="#contact-form"><button class="navigation" id="ObrCall">Обратная связь</button></a>
+                <a href="/"><button class="navigation" id="routesButton" style="display: none;">Маршруты</button></a>
+                <a href="#footer-teleport"><button class="navigation" id="Contact-info">Контакты</button></a>
+                <a href="/login"><button class="navigation" id="SignInAdmin1">Вход</button></a>
             </div>
             <div id="userpanel"> <!--фото пользователя и кнопка "домой"-->
                 <div>
-                    <a href="/login"><button class="navigation" id="SignInAdmin">Sign in</button></a>
+                    <a href="/login"><button class="navigation" id="SignInAdmin">Вход</button></a>
                 </div>
                 <div>
                     <a href="/login"><img src="images for index.html/user_avatar.png" alt="" width="70px" height="70px"></a>
@@ -39,7 +49,7 @@
         </div>
     </header>
 
-    <div class="container-form">
+    <div class="container-form" id="information-project">
         <div class="narrow-text">
             <div class="owl-carousel owl-theme">
                 <div class="fading-text">
@@ -63,7 +73,7 @@
                 <div class="fading-text">
                     <h2>Команда проекта</h2>
                     <p>Проект разработан командой талантливых специалистов, которые внесли свой вклад в его успех.</p>
-                    <img src="images for index.html/photo_2024-05-29_11-48-27.png" alt="Описание фотографии 2">
+                    <img src="images for index.html/datchik.jpg" alt="Описание фотографии 2">
                 </div>
                 <div class="fading-text">
                     <h2>Наши цели</h2>
@@ -73,7 +83,6 @@
                         <li>Повышение уровня экологической безопасности</li>
                     </ul>
                 </div>
-                <div class="item"><img src="images for index.html/photo_2024-05-29_11-48-27.png" alt="Описание фотографии 1"></div>
             </div>
         </div>
     </div>
@@ -94,22 +103,22 @@
         </form>
       </div>
 
-    <footer class="page-footer">
-        <div class="container">
+    <footer class="page-footer" id="footer-teleport">
+        <div class="container-footer">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 OurInfo-container">
                     <h3>О нас</h3>
-                    <p>EcoTechBin - это платформа для управления отходами, которая помогает людям и компаниям сократить свой экологический след.</p>
+                    <p>EcoTechBin - это платформа для управления отходами, которая помогает компаниям сократить свой экологический след.</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 contacts-container">
                     <h3>Контакты</h3>
                     <ul class="contact-list">
-                        <li><i class="fas fa-phone"></i> +7 (123) 456-78-90</li>
-                        <li><i class="fas fa-envelope"></i> info@ecotechbin.com</li>
-                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Ленина, д. 1</li>
+                        <li><i class="fas fa-phone"></i> +7 (961) 295-11-32</li>
+                        <li><i class="fas fa-envelope"></i> info@ecotechbin.ru</li>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Таганрог, ул. Ленина, д. 1</li>
                     </ul>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 contacts-container">
                     <h3>Социальные сети</h3>
                     <ul class="social-links">
                         <li><a href="https://t.me/+l3NACUqNU69iNzFi"><i class="fab fa-telegram"></i></a></li>
@@ -119,7 +128,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <p class="copyright">© 2023 EcoTechBin. Все права защищены.</p>
+                    <p class="copyright">© 2024 EcoTechBin. Все права защищены.</p>
                 </div>
             </div>
         </div>
@@ -149,6 +158,21 @@
                 autoplayHoverPause: true // Пауза при наведении курсора
             });
         });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth < 768) { // Замените 768 на желаемую ширину
+                window.scrollTo(0, 0);
+            }
+            });
+
+
+            // Обработчик клика на кнопку "гамбургера"
+            const hamburgerButton = document.querySelector('.hamburger-button');
+            const links = document.getElementById('links'); // получаем элемент #links
+
+            hamburgerButton.addEventListener('click', () => {
+            links.classList.toggle('show'); // переключаем класс 'show' у #links
+            });
     </script>
 
     <script src="scripts/scriptsLogin.js" defer></script>
