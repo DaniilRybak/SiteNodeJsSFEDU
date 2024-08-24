@@ -4,9 +4,12 @@ const path = require('path');
 const mysql = require('mysql2');
 const crypto = require('crypto');
 const session = require('express-session');
+const http = require('http');
 
 
 const secretKey = crypto.randomBytes(64).toString('hex');
+
+const hostname = '0.0.0.0';
 
 // Настройка сессии
 
@@ -137,6 +140,13 @@ app.get('/isLoggedIn', (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Привет из Node.js!');
+});
+
+app.listen(3000, hostname, () => {
   console.log('Сервер запущен на порту 3000');
 });

@@ -186,6 +186,10 @@ main{
     display: block; /* Показываем кнопку на маленьких экранах */
   }
 
+  .bin-info {
+    width: 100%;
+    }
+
   #route-alert{
     width: 85%;
   }
@@ -226,4 +230,10 @@ main{
   #SignInAdmin1 {
     display: none;
   }
+}
+
+
+.page-header--blog{
+  display: flex;
+  justify-content: center;
 }
