@@ -68,6 +68,28 @@
 
         <script type="text/javascript">
 
+            var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
+            };
+
+            function success(pos) {
+            var crd = pos.coords;
+
+            console.log("Ваше текущее местоположение:");
+            console.log(`Широта: ${crd.latitude}`);
+            console.log(`Долгота: ${crd.longitude}`);
+            console.log(`Плюс-минус ${crd.accuracy} метров.`);
+            }
+
+            function error(err) {
+            console.warn(`ERROR(${err.code}): ${err.message}`);
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error, options)
+
+
             function createChart(canvasId, percent) {
                 var ctx = document.getElementById(canvasId).getContext('2d');
                 new Chart(ctx, {
@@ -242,6 +264,7 @@
             links.classList.toggle('show'); // переключаем класс 'show' у #links
             });
         </script>
+        <script src="scripts/Geolocathion.js" defer></script>
 
     </main>
     <!-- Optional JavaScript -->
