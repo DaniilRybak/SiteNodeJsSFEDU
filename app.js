@@ -25,7 +25,7 @@ app.use(session({
 const dbConfig = {
   host: '194.67.88.76',
   user: 'root',
-  port: '22',
+  port: '3306',
   password: 'Primera12',
   database: 'MySite'
 };
