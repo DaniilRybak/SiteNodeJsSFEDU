@@ -23,11 +23,11 @@ app.use(session({
 
 // Настройки подключения к базе данных
 const dbConfig = {
-  host: 'localhost',
-  user: 'root',
-  port: '3306',
-  password: 'Primera12',
-  database: 'MySite'
+  host: '79.174.88.28',
+  user: 'user1',
+  port: '17576',
+  password: 'exte`dfZXQd7AmeH/3zeFcCP',
+  database: 'user1'
 };
 
 // Создание подключения к базе данных
