@@ -9,7 +9,8 @@ const http = require('http');
 
 const secretKey = crypto.randomBytes(64).toString('hex');
 
-const hostname = '0.0.0.0';
+const hostname = 'ecotechbin.ru'; //  Замените на ваш IP-адрес или домен
+const port = 3000; // Замените на желаемый порт
 
 // Настройка сессии
 
@@ -147,6 +148,6 @@ const server = http.createServer((req, res) => {
   res.end('Привет из Node.js!');
 });
 
-app.listen(3000, hostname, () => {
-  console.log('Сервер запущен на порту 3000');
+app.listen(port, () => {
+  console.log('Server running at http://${hostname}:${port}/');
 });
