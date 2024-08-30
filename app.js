@@ -23,7 +23,7 @@ app.use(session({
 
 // Настройки подключения к базе данных
 const dbConfig = {
-  host: '194.67.88.76',
+  host: 'localhost',
   user: 'root',
   port: '3306',
   password: 'Primera12',
