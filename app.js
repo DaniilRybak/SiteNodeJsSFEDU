@@ -26,8 +26,8 @@ const dbConfig = {
   host: 'localhost',
   user: 'root',
   port: '3306',
-  password: '1234',
-  database: 'trash_bins'
+  password: 'Primera12',
+  database: 'MySite'
 };
 
 // Создание подключения к базе данных
