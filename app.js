@@ -10,7 +10,7 @@ const http = require('http');
 const secretKey = crypto.randomBytes(64).toString('hex');
 
 const hostname = '194.67.88.76'; //  Замените на ваш IP-адрес или домен
-const port = 22; // Замените на желаемый порт
+const port = 3000; // Замените на желаемый порт
 
 // Настройка сессии
 
