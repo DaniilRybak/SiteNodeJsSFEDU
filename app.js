@@ -148,6 +148,6 @@ const server = http.createServer((req, res) => {
   res.end('Привет из Node.js!');
 });
 
-app.listen(port, hostname, () => {
+app.listen(port, () => {
   console.log('Server running at http://${hostname}:${port}/');
 });
