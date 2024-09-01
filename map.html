@@ -68,13 +68,19 @@
 
         <script type="text/javascript">
 
-            let userMarker; //маркер местоположения
-
             var options = {
             enableHighAccuracy: true,
             timeout: 5000,
             maximumAge: 0,
             };
+
+            // Проверка протокола HTTPS
+            if (window.location.protocol === 'https:') {
+                // Получение геолокации
+                navigator.geolocation.getCurrentPosition(success, error, options);
+            } else {
+                console.warn('Geolocation API доступен только по HTTPS.');
+            }
 
             function success(pos) {
             var crd = pos.coords;
@@ -83,13 +89,25 @@
             console.log(`Широта: ${crd.latitude}`);
             console.log(`Долгота: ${crd.longitude}`);
             console.log(`Плюс-минус ${crd.accuracy} метров.`);
+
+            // Установка центра карты на полученные координаты
+            myMap.setCenter([crd.latitude, crd.longitude]);
+
+            // Создание метки местоположения
+            var userLocationPlacemark = new ymaps.Placemark([crd.latitude, crd.longitude], {
+                hintContent: 'Ваше местоположение'
+            }, {
+                preset: 'islands#circleIcon',
+                iconColor: '#007bff' // Синий цвет метки
+            });
+
+            // Добавление метки на карту
+            myMap.geoObjects.add(userLocationPlacemark);
             }
 
             function error(err) {
             console.warn(`ERROR(${err.code}): ${err.message}`);
             }
-
-            navigator.geolocation.getCurrentPosition(success, error, options)
 
 
             function createChart(canvasId, percent) {
@@ -159,31 +177,6 @@
                 myMap.events.add('click', function () {
                     closeBinInfo(); 
                 });
-
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        function (position) {
-                            let userCoords = [position.coords.latitude, position.coords.longitude];
-
-                            userMarker = new ymaps.Placemark(userCoords, {
-                                // Здесь можно добавить контент балуна для маркера мусоровоза
-                                balloonContent: "Мусоровоз" 
-                            }, {
-                                preset: 'islands#geolocationIcon', // Используем стандартный значок геолокации
-                                iconColor: '#007bff' // Или любой другой цвет, который вам нравится
-                            });
-
-                            myMap.geoObjects.add(userMarker);
-                        },
-                        function (error) {
-                            console.error("Ошибка определения местоположения:", error);
-                            // Здесь можно обработать ошибку, например, показать сообщение пользователю
-                        }
-                    );
-                } else {
-                    console.error("Геолокация не поддерживается браузером.");
-                    // Здесь можно обработать отсутствие поддержки геолокации
-                }
             }
 
             ymaps.ready(init);
@@ -269,19 +262,6 @@
                     }
                     })
                     .catch(error => console.error('Ошибка при получении данных:', error));
-                    
-
-                    if (userMarker) {
-                        navigator.geolocation.getCurrentPosition(
-                            function (position) {
-                                let userCoords = [position.coords.latitude, position.coords.longitude];
-                                userMarker.geometry.setCoordinates(userCoords);
-                            },
-                            function (error) {
-                                console.error("Ошибка определения местоположения:", error);
-                            }
-                        );
-                    }
                 }
 
             function closeBinInfo() {
@@ -289,6 +269,11 @@
             }
 
 
+        </script>
+
+
+
+        <script>
             window.addEventListener('resize', function() {
             if (window.innerWidth < 768) { // Замените 768 на желаемую ширину
                 window.scrollTo(0, 0);
@@ -304,7 +289,6 @@
             links.classList.toggle('show'); // переключаем класс 'show' у #links
             });
         </script>
-        <script src="scripts/Geolocathion.js" defer></script>
 
     </main>
     <!-- Optional JavaScript -->
