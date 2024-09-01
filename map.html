@@ -74,14 +74,6 @@
             maximumAge: 0,
             };
 
-            // Проверка протокола HTTPS
-            if (window.location.protocol === 'https:') {
-                // Получение геолокации
-                navigator.geolocation.getCurrentPosition(success, error, options);
-            } else {
-                console.warn('Geolocation API доступен только по HTTPS.');
-            }
-
             function success(pos) {
             var crd = pos.coords;
 
@@ -89,25 +81,13 @@
             console.log(`Широта: ${crd.latitude}`);
             console.log(`Долгота: ${crd.longitude}`);
             console.log(`Плюс-минус ${crd.accuracy} метров.`);
-
-            // Установка центра карты на полученные координаты
-            myMap.setCenter([crd.latitude, crd.longitude]);
-
-            // Создание метки местоположения
-            var userLocationPlacemark = new ymaps.Placemark([crd.latitude, crd.longitude], {
-                hintContent: 'Ваше местоположение'
-            }, {
-                preset: 'islands#circleIcon',
-                iconColor: '#007bff' // Синий цвет метки
-            });
-
-            // Добавление метки на карту
-            myMap.geoObjects.add(userLocationPlacemark);
             }
 
             function error(err) {
             console.warn(`ERROR(${err.code}): ${err.message}`);
             }
+
+            navigator.geolocation.getCurrentPosition(success, error, options)
 
 
             function createChart(canvasId, percent) {
