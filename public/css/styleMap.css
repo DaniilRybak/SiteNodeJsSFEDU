@@ -14,12 +14,6 @@ main{
     transform: translate(-50%, -50%); /* Сдвигаем на половину собственной ширины и высоты */
 }
   
-  .fading-text {
-    display: block; /* Занимаем всю ширину контейнера */
-    text-align: center; /* Выравнивание текста по центру */
-    animation: fadeInOut 5s linear infinite; /* Анимация смены текста */
-  }
-  
   @keyframes fadeInOut {
     0%, 100% {
       opacity: 0; /* Текст невидимый в начале и в конце */

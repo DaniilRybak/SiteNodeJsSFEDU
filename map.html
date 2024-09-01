@@ -68,6 +68,8 @@
 
         <script type="text/javascript">
 
+            let userMarker; //маркер местоположения
+
             var options = {
             enableHighAccuracy: true,
             timeout: 5000,
@@ -157,6 +159,31 @@
                 myMap.events.add('click', function () {
                     closeBinInfo(); 
                 });
+
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        function (position) {
+                            let userCoords = [position.coords.latitude, position.coords.longitude];
+
+                            userMarker = new ymaps.Placemark(userCoords, {
+                                // Здесь можно добавить контент балуна для маркера мусоровоза
+                                balloonContent: "Мусоровоз" 
+                            }, {
+                                preset: 'islands#geolocationIcon', // Используем стандартный значок геолокации
+                                iconColor: '#007bff' // Или любой другой цвет, который вам нравится
+                            });
+
+                            myMap.geoObjects.add(userMarker);
+                        },
+                        function (error) {
+                            console.error("Ошибка определения местоположения:", error);
+                            // Здесь можно обработать ошибку, например, показать сообщение пользователю
+                        }
+                    );
+                } else {
+                    console.error("Геолокация не поддерживается браузером.");
+                    // Здесь можно обработать отсутствие поддержки геолокации
+                }
             }
 
             ymaps.ready(init);
@@ -242,6 +269,19 @@
                     }
                     })
                     .catch(error => console.error('Ошибка при получении данных:', error));
+                    
+
+                    if (userMarker) {
+                        navigator.geolocation.getCurrentPosition(
+                            function (position) {
+                                let userCoords = [position.coords.latitude, position.coords.longitude];
+                                userMarker.geometry.setCoordinates(userCoords);
+                            },
+                            function (error) {
+                                console.error("Ошибка определения местоположения:", error);
+                            }
+                        );
+                    }
                 }
 
             function closeBinInfo() {

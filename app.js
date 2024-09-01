@@ -127,11 +127,6 @@ app.get('/map', isLoggedIn, (req, res) => {
   res.sendFile(__dirname + '/map.html');
 });
 
-app.get('/geo', isLoggedIn, (req, res) => {
-  
-  res.sendFile(__dirname + '/Geolocathion.html');
-});
-
 // Новый маршрут для проверки авторизации
 app.get('/isLoggedIn', (req, res) => {
   if (req.session.username) {

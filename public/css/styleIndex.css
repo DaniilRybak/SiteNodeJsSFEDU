@@ -11,6 +11,13 @@ li{
   margin: 0 auto; /* Центрируем текст по горизонтали */
 }
 
+#success-message {
+  color: #254e23;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
 body{
   background-image: url('1667397567_5-celes-club-p-fon-dlya-prezentatsii-po-ekologii-oboi-5.jpg');
   background-size: cover;
@@ -135,6 +142,7 @@ body{
   
   button[type="submit"] {
     background-color: #4CAF50; /* Green */
+    font-family: "Noto Sans", sans-serif;
     color: white;
     padding: 10px 20px;
     border: none;
@@ -145,6 +153,7 @@ body{
   
   button[type="submit"]:hover {
     background-color: #45a049; /* Darker green on hover */
+    font-family: "Noto Sans", sans-serif;
   }
 
   #submit-form{

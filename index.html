@@ -88,19 +88,26 @@
     </div>
 
     <div class="container-form">
-        <form id="contact-form">
-          <h2>Напишите нам!</h2>
-          <div class="form-group">
-            <input type="text" id="name" name="name" required placeholder="Ваше имя"> 
+        <div class="form">
+            <form id="contact-form">
+            <h2>Напишите нам!</h2>
+            <div class="form-group">
+                <input type="text" id="name" name="name" required placeholder="Ваше имя"> 
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" required placeholder="Ваша почта">
+            </div>
+            <div class="form-group">
+                <textarea id="message" name="message" required placeholder="Ваше сообщение"></textarea>
+            </div>
+            <button type="submit" id="submit-form">Отправить</button>
+            </form>
+        </div>
+
+        <div id="success-message" style="display: none; text-align: center;">
+            Сообщение успешно отправлено!
           </div>
-          <div class="form-group">
-            <input type="email" id="email" name="email" required placeholder="Ваша почта">
-          </div>
-          <div class="form-group">
-            <textarea id="message" name="message" required placeholder="Ваше сообщение"></textarea>
-          </div>
-          <button type="submit" id="submit-form">Отправить</button>
-        </form>
+
       </div>
 
     <footer class="page-footer" id="footer-teleport">
@@ -166,6 +173,23 @@
 
             hamburgerButton.addEventListener('click', () => {
             links.classList.toggle('show'); // переключаем класс 'show' у #links
+            });
+
+
+
+            const form = document.getElementById('contact-form');
+            const successMessage = document.getElementById('success-message');
+            const containerForm = document.querySelector('.form'); // Получаем родительский контейнер
+
+            form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+            // ... ваш код для отправки данных формы ...
+
+            // После успешной отправки:
+            containerForm.style.display = 'none'; // Скрываем контейнер с формой
+            successMessage.style.display = 'block'; // Показываем сообщение об успешной отправке
+            form.reset(); // Очищаем поля формы (опционально)
             });
     </script>
 
