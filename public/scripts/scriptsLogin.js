@@ -12,7 +12,6 @@ fetch('/isLoggedIn', {
         document.getElementById('ObrCall').style.display = 'none';
         document.getElementById('Contact-info').style.display = 'none';
         document.getElementById('SignInAdmin').style.display = 'none';
-        document.getElementById('SignInAdmin1').style.display = 'none';
     } else {
         // Пользователь не авторизован, скрываем кнопку
         document.getElementById('mapButton').style.display = 'none';

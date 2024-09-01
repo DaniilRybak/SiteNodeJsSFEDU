@@ -34,6 +34,7 @@ main{
   header {
     background-color: rgb(54, 53, 59);
     height: 70px;
+    border-bottom: 1px solid white;
   }
 
   @media (min-width: 1440px) {
@@ -180,6 +181,10 @@ main{
   margin-left: 20px; /* Отступ от кнопок */
 }
 
+#SignInAdmin1{
+  color:  #C7F9CC;
+}
+
 /* Медиа-запросы для адаптивности */
 @media (max-width: 768px) { 
   .hamburger-button {
@@ -196,6 +201,18 @@ main{
 
   #SignInAdmin1 {
     display: block;
+    position: relative; /* Позиционирование для псевдоэлемента */
+  }
+
+  #SignInAdmin1::before { /* Создаем псевдоэлемент для полоски */
+    content: ""; /* Обязательное свойство для псевдоэлементов */
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 180%;
+    height: 1px; /* Толщина полоски */
+    background-color: #ffffff; /* Цвет полоски */
+    transform: translateX(-50%) translateY(-100%); /* Сдвигаем полоску вверх за границу кнопки */
   }
 
   #links,
@@ -210,6 +227,7 @@ main{
     flex-direction: column; /* Располагаем элементы меню вертикально */
     z-index: 100;
     transition: transform 0.3s ease-in-out; /* Добавляем плавную анимацию */
+    gap: 5px;
   }
 
   /* НОВЫЙ CSS: показываем меню, когда у #links есть класс show */
