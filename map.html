@@ -85,10 +85,6 @@
             console.log(`Плюс-минус ${crd.accuracy} метров.`);
             }
 
-            function error(err) {
-            console.warn(`ERROR(${err.code}): ${err.message}`);
-            }
-
             navigator.geolocation.getCurrentPosition(success, error, options)
 
 
