@@ -87,6 +87,32 @@
         </div>
     </div>
 
+
+
+    <div class="container-form first">
+            <div class="information-product down"> <img class="information-product-photo" src="images for index.html/BMW4.jpg" alt="Описание фотографии 1"> </div>
+            <div class="information-product">
+                <p>Этот датчик контролирует уровень заполнения бака, измеряя расстояние до мусора и передавая данные о проценте заполнения. Это позволяет оптимизировать вывоз мусора, предотвращая переполнение баков и загрязнение, а также снижая расходы на вывоз.</p>
+                </div>
+
+                <div class="information-product">
+                    <p>Этот датчик обеспечивает пожарную безопасность бака, реагируя на повышение температуры и дым, сигнализируя о возможном возгорании. Это позволяет быстро реагировать на опасность, предотвращая пожары, ущерб и загрязнение окружающей среды, повышая безопасность.</p>
+                </div>
+
+                <div class="information-product down"> <img class="information-product-photo" src="images for index.html/BMW3.jpg" alt="Описание фотографии 2"> </div>
+
+                <div class="information-product down"> <img class="information-product-photo" src="images for index.html/BMW2.jpg" alt="Описание фотографии 3"> </div>
+            <div class="information-product">
+                <p>Этот датчик контролирует уровень заполнения бака, измеряя расстояние до мусора и передавая данные о проценте заполнения. Это позволяет оптимизировать вывоз мусора, предотвращая переполнение баков и загрязнение, а также снижая расходы на вывоз.</p>
+                </div>
+
+                <div class="information-product">
+                    <p>Этот датчик обеспечивает пожарную безопасность бака, реагируя на повышение температуры и дым, сигнализируя о возможном возгорании. Это позволяет быстро реагировать на опасность, предотвращая пожары, ущерб и загрязнение окружающей среды, повышая безопасность.</p>
+                </div>
+
+                <div class="information-product down"> <img class="information-product-photo" src="images for index.html/BMW1.jpg" alt="Описание фотографии 4"> </div>
+    </div>
+
     <div class="container-form">
         <div class="form">
             <form id="contact-form">
@@ -191,6 +217,23 @@
             successMessage.style.display = 'block'; // Показываем сообщение об успешной отправке
             form.reset(); // Очищаем поля формы (опционально)
             });
+    </script>
+
+
+    <script>
+        const containers = document.querySelectorAll('.information-product');
+
+        const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            } 
+        });
+        });
+
+        containers.forEach(container => {
+        observer.observe(container);
+        });
     </script>
 
     <script src="scripts/scriptsLogin.js" defer></script>

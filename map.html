@@ -61,7 +61,7 @@
             <p>Обнаружены датчики с низким зарядом батареи.</p>
             <button onclick="closeLowChargeAlert()">Закрыть</button>
         </div> 
-            <button onclick="closeRouteAlert()">Продолжить</button>
+            <button id="NextRoute" onclick="closeRouteAlert()">Продолжить</button>
         </div>
 
 
@@ -121,6 +121,7 @@
                 document.getElementById('route-alert').style.display = 'none';
             }
 
+
             let myMap;  // Объявляем myMap здесь, чтобы она была доступна в других функциях
             let clusterer; // Объявляем clusterer здесь, чтобы он был доступен в других функциях
             let mapInitialized = false; 
@@ -154,7 +155,7 @@
                 updateMapData(); // Первоначальная загрузка данных
 
                 // Обновляем данные каждые 10 секунд (10000 миллисекунд)
-                setInterval(updateMapData, 100000); 
+                setInterval(updateMapData, 10000); 
 
                 // Обработчик клика на карту (для скрытия подсказки)
                 myMap.events.add('click', function () {
@@ -172,15 +173,21 @@
 
                  // Наша кнопка "Построить маршрут"
                  const myRouteButton = document.getElementById('myRouteButton');
+                 const nextRouteButton = document.getElementById('NextRoute');
 
-                myRouteButton.addEventListener('click', () => {
-                    if (multiRoute) { // Если маршрут уже построен, удаляем его
-                        myMap.geoObjects.remove(multiRoute);
-                        multiRoute = null;
-                    } else {
-                        buildRoute();
-                    }
-                });
+                 function addRouteButtonClickHandler(button) {
+                    button.addEventListener('click', () => {
+                        if (multiRoute) { 
+                            myMap.geoObjects.remove(multiRoute);
+                            multiRoute = null;
+                        } else {
+                            buildRoute();
+                        }
+                    });
+                }
+
+                addRouteButtonClickHandler(myRouteButton);
+                addRouteButtonClickHandler(nextRouteButton);
             }
 
             function buildRoute() {
@@ -200,6 +207,7 @@
 
                     // Если есть хотя бы одна точка для маршрута (кроме начальной)
                     if (wayPoints.length > 1) {
+                    
                         // Используем ymaps.route для построения маршрута
                         ymaps.route(wayPoints, {
                             mapState: { zoom: 15 },
@@ -223,6 +231,7 @@
                 });
             }
 
+
             function updateMapData() {
                 fetch('/api/bins')
                     .then(response => response.json())
@@ -241,20 +250,19 @@
 
                         // Определение цвета маркера
                         if (bin.chargeLevel < 20) {
-                        iconColor = placemarkColors[2]; // Оранжевый, если низкий заряд
-                        lowChargeCount++;
-                        } else {
-                        iconColor = bin.fullness > 80 ? placemarkColors[1] : placemarkColors[0]; // Красный/Зеленый
+                            iconColor = placemarkColors[2]; // Оранжевый, если низкий заряд
+                            lowChargeCount++;
+                        } else if(bin.fullness > 80) {
+                            iconColor = placemarkColors[1];
+                            fullBinsCount++;
                         }
-
-                        // Подсчет заполненных баков
-                        if (bin.fullness > 80) {
-                        fullBinsCount++;
+                        else{
+                            iconColor = placemarkColors[0];
                         }
 
                         // Создание маркера
                         var marker = new ymaps.Placemark([bin.latitude, bin.longitude], {}, {
-                        iconColor: iconColor
+                            iconColor: iconColor
                         });
 
                         // Обработчик клика на маркер
@@ -286,7 +294,7 @@
                     });
 
                     // Логика для показа уведомлений
-                    if (fullBinsCount >= 10 && lowChargeCount > 0) {
+                    if (fullBinsCount >= 9 && lowChargeCount > 0) {
                         showRouteAlert(`Достаточное количество контейнеров заполнены. Необходимо выехать на маршрут для сбора мусора.\n\nНужна зарядка батарей в ${lowChargeCount} датчиках.`);
                     } else if (fullBinsCount >= 10) {
                         showRouteAlert('Достаточное количество контейнеров заполнены. Необходимо выехать на маршрут для сбора мусора.');
@@ -313,11 +321,6 @@
 
         </script>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> test
         <script>
             window.addEventListener('resize', function() {
             if (window.innerWidth < 768) { // Замените 768 на желаемую ширину

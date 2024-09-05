@@ -326,3 +326,41 @@ body{
   display: flex;
   justify-content: center;
 }
+
+.information-product{
+  width: 50%;
+  text-align: center;
+
+  opacity: 0; 
+  transition: opacity 1.5s ease-in-out;
+}
+
+.down{
+  align-self: end;
+}
+
+.information-product p{
+  text-align: center; /* Центрирование текста по горизонтали */
+  display: flex; /* Включаем Flexbox */
+  align-items: center; /* Центрирование по вертикали */
+  justify-content: center; /* Центрирование по горизонтали (на случай, если текст занимает несколько строк) */
+  height: 100%; /* Занимаем всю высоту контейнера */ 
+  font-size: 24px;
+}
+
+.first{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.information-product-photo{
+  width: 90%;
+  height: 90%;
+}
+
+
+
+.information-product.show {
+  opacity: 1;
+}
