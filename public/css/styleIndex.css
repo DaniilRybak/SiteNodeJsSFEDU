@@ -25,8 +25,45 @@ body{
 }
   
   .fading-text {
-    display: block; /* Занимаем всю ширину контейнера */
+    display: block;
+    text-align: center;
+    animation: fadeInOut 5s infinite; /* Анимация затухания */
+    margin-top: -100px; /* Смещение вверх */
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 600;
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+  }
+  
+  .arrow-down {
+    position: absolute;
+    bottom: 50px; /* Позиционирование стрелки снизу */
+    display: flex;
     text-align: center; /* Выравнивание текста по центру */
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 600;
+  }
+
+  .arrow-down p {
+    margin-bottom: 0px;
+    color: black;
+  }
+  
+  .arrow-down img,
+  .arrow-down:hover p {
+    transition: transform 0.3s ease; /* Плавная анимация */
+  }
+  
+  .arrow-down:hover img,
+  .arrow-down:hover p
+   {
+    transform: translateY(-5px); /* Смещение стрелки вверх при наведении */
   }
   
   header {
@@ -112,6 +149,16 @@ body{
     width: 95%; 
     margin: 0 auto 20px; /* Added bottom margin */
     margin-top: 20px;
+  }
+
+  .start-window{
+    width: 100vw; /* Устанавливаем ширину контейнера равной 100% ширины области просмотра */
+    height: 98vh; /* Устанавливаем высоту контейнера равной 100% высоты области просмотра */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Центрируем элементы по вертикали */
+    position: relative; /* Позиционирование для стрелки */
   }
     
   #contact-form {
@@ -314,6 +361,47 @@ body{
   .navigation, #userpanel > div {
     margin-bottom: 10px; /* Отступ между элементами меню */
   }
+
+
+  .information-product p {
+    margin-top: 5px;
+    font-size: 18px;
+    /* ... ваш существующий CSS для параграфа ... */
+    overflow: hidden; /* Скрываем текст, выходящий за пределы контейнера */
+    text-overflow: ellipsis; /* Добавляем многоточие в конце обрезанного текста */
+    display: -webkit-box; /* Для WebKit браузеров */
+    -webkit-line-clamp: 3; /* Ограничиваем количество строк до 3 */
+    -webkit-box-orient: vertical;
+  }
+
+  .information-product .show-more-button {
+    margin-bottom: 30px;
+    margin-top: 0px;
+    display: block; /* Показываем кнопку */
+    margin-top: 10px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .information-product .show-more-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+
+  .information-product.expanded p {
+    -webkit-line-clamp: unset; /* Снимаем ограничение на количество строк */
+    overflow: visible; /* Показываем весь текст */
+  }
+
+  .information-product-photo{
+    width: 90%;
+    height: 90%;
+  }
+  
 }
 
 @media (min-width: 768px) { /* Или другое значение ширины экрана */
@@ -327,40 +415,74 @@ body{
   justify-content: center;
 }
 
-.information-product{
-  width: 50%;
-  text-align: center;
+.first{
+  display: flex;
+  flex-direction: column; /* Располагаем элементы по вертикали */
+}
 
-  opacity: 0; 
+
+
+.information-product{
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  text-align: center; /* Центрирование текста внутри контейнера */
+
+  opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
 
-.down{
-  align-self: end;
-}
-
 .information-product p{
-  text-align: center; /* Центрирование текста по горизонтали */
-  display: flex; /* Включаем Flexbox */
-  align-items: center; /* Центрирование по вертикали */
-  justify-content: center; /* Центрирование по горизонтали (на случай, если текст занимает несколько строк) */
+  margin-left: 20px;
+  margin-right: 20px;
   height: 100%; /* Занимаем всю высоту контейнера */ 
-  font-size: 24px;
+  margin-bottom: 0px;
 }
-
-.first{
-  display: flex;
-  flex-wrap: wrap;
-
-}
-
-.information-product-photo{
-  width: 90%;
-  height: 90%;
-}
-
-
 
 .information-product.show {
   opacity: 1;
+}
+
+@media (max-width: 1260px) { /* Или другое значение ширины экрана */
+
+  .information-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    text-align: center; /* Центрирование текста внутри контейнера */
+  }
+
+  .revers{
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 1260px) and (min-width: 769px){
+  .information-product p{
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+
+  .information-product-photo{
+    width: 60%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 1260px){
+  .information-product p{
+    font-size: 24px;
+  }
+
+  .information-product-photo{
+    width: 45%;
+    height: 45%;
+  }
+}
+
+.show-more-button{
+  display: none;
 }
