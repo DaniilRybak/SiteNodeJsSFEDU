@@ -1,122 +1,152 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoTechBin</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/styleIndex.css">
-    <link rel="icon" type="image/png" href="images for index.html/icon.png">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Owl Carousel CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
-    <header class="page-header  page-header--blog">
-        <div class="container">
-            <div id="logo"> <!--Лого компании-->
-                <a href="/"> <img src="images for index.html/logo.jpg" alt="Ошибка загрузки!" width="230px" height="60px"></a>
-            </div>
+  <header>
+    <nav>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="menu-header">
+            <li><a href="#features">Характеристики</a></li>
+            <li><a href="#application">Применение</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+            <li><a href="/login" style="color: rgb(0, 78, 0);">Вход</a></li>
+        </ul>
+    </nav>
+</header>
+ <section class="about">
+        <div class="about-text">
+            <h1>EcoTechBin</h1>
+            <p>Мы делаем датчики наполняемости мусорных контейнеров.</p>
+        </div>
+        <div class="about-image">
+            <img src="images for index.html/BMW1.jpg" alt="Датчик наполняемости"> 
+        </div>
+    </section>
 
-            <button class="hamburger-button">
-                <img src="images for index.html/listing.png" alt="Меню" width="45px" height="45px"> 
-            </button>
+    <section id="features" class="features" data-aos="fade-up">
+        <h2>Характеристики датчика</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <i class="fas fa-battery-full"></i> <h3>Длительный срок службы батареи</h3>
+            <p>Наши датчики работают до 5 лет без замены батареи.</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-signal"></i> <h3>Беспроводная передача данных</h3>
+            <p>Данные о заполнении передаются по защищенному протоколу.</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-tint"></i> <h3>Водонепроницаемый корпус</h3>
+            <p>Датчики надежно защищены от влаги и пыли.</p>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-ruler-vertical"></i> <h3>Точное измерение</h3>
+            <p>Высокая точность измерения уровня заполнения.</p>
+          </div>
+        </div>
+    </section>
 
-            <div id="links"> <!--навигационные кнопки, обёрнутые в ссылки-->
-                <a href="/"><button class="navigation" style="display: none;"></button></a>
-                
-                <a href="#information-project"><button class="navigation" id="OurInfo">О нас</button></a>
-                <a href="/map"><button class="navigation" id="mapButton" style="display: none;">Карта</button></a>
-                <a href="#contact-form"><button class="navigation" id="ObrCall">Обратная связь</button></a>
-                <a href="/"><button class="navigation" id="routesButton" style="display: none;">Маршруты</button></a>
-                <a href="#footer-teleport"><button class="navigation" id="Contact-info">Контакты</button></a>
-                <a href="/login"><button class="navigation" id="SignInAdmin1">Логин</button></a>
+    <section id="application" class="application" data-aos="fade-up">
+        <h2>Где можно использовать датчики</h2>
+        <div class="application-grid">
+            <div class="application-item">
+                <i class="fas fa-building"></i>
+                <h3>Муниципальные службы</h3>
+                <p>Оптимизация сбора мусора в городах.</p>
             </div>
-            <div id="userpanel"> <!--фото пользователя и кнопка "домой"-->
-                <div>
-                    <a href="/login"><button class="navigation" id="SignInAdmin">Логин</button></a>
-                </div>
-                <div>
-                    <a href="/login"><img src="images for index.html/user_avatar.png" alt="" width="45px" height="45px" style="filter: invert(1);"></a>
-                </div>
+            <div class="application-item">
+                <i class="fas fa-home"></i>
+                <h3>Управляющие компании</h3>
+                <p>Эффективное управление отходами в жилых комплексах.</p>
+            </div>
+            <div class="application-item">
+                <i class="fas fa-industry"></i>
+                <h3>Промышленные предприятия</h3>
+                <p>Контроль уровня заполнения контейнеров на производстве.</p>
+            </div>
+            <!-- Добавьте другие варианты применения -->
+        </div>
+    </section>
+
+    <section id="application2" class="application" data-aos="fade-up">
+        <h2>Как это работает</h2>
+        <div class="application-grid">
+            <div class="application-item">
+                <img src="images for index.html/picMap.png">
+                <h3>Отображение</h3>
+                <p>На карте отображается уровень заполненности всех баков.</p>
+            </div>
+            <div class="application-item">
+                <img src="images for index.html/picNote1.png">
+                <h3>Уведомление о заполненности</h3>
+                <p>При заполнении бака выше заденного уровня, диспетчеру приходит уведомление.</p>
+            </div>
+            <div class="application-item">
+                <img src="images for index.html/picBin.png">
+                <h3>График вывоза</h3>
+                <p>в соответствии со списком заполненных баков, составляется график вывоза мусора.</p>
+            </div>
+            <div class="application-item">
+                <img src="images for index.html/mapNote2.png">
+                <h3>Уведомление об изменениях</h3>
+                <p>Диспетчер получает уведомление о вывозе мусора, видит на графике уровень изменения залолненности бака.</p>
             </div>
         </div>
-    </header>
-
-    <div class="start-window" id="information-project">
-        <div class="fading-text">
-            <h1>EcoTechBin - будущее управления отходами</h1>
-          </div>
-          <div class="arrow-down">
-            <a href="#container-href">
-                <p>Узнать подробнее</p>
-              <img src="images for index.html/arrow-down.png" alt="Узнать подробнее" width="100px" height="100px">
-            </a>
-          </div>
-    </div>
+    </section>
 
 
-
-    <div class="container-form first" id="container-href">
-            <div class="information-product"> 
-                <img class="information-product-photo" src="images for index.html/BMW4.jpg" alt="Описание фотографии 1">
-                <p>Этот датчик контролирует уровень заполнения бака, измеряя расстояние до мусора и передавая данные о проценте заполнения. Это позволяет оптимизировать вывоз мусора, предотвращая переполнение баков и загрязнение, а также снижая расходы на вывоз.</p>
-                <button class="show-more-button">Показать весь текст</button> 
+    <section id="sensor-details" class="sensor-details" data-aos="fade-up">
+        <div class="sensor-details-container">
+            <div class="sensor-image">
+                <img src="images for index.html/BMW2.jpg" alt="Датчик EcoTechBin">
+                <p class="image-caption">Датчик EcoTechBin в работе</p>
             </div>
-            <div class="information-product revers">
-                <button class="show-more-button">Показать весь текст</button> 
-                <p>Этот датчик обеспечивает пожарную безопасность бака, реагируя на повышение температуры и дым, сигнализируя о возможном возгорании. Это позволяет быстро реагировать на опасность, предотвращая пожары, ущерб и загрязнение окружающей среды, повышая безопасность.</p>
-                <img class="information-product-photo" src="images for index.html/BMW3.jpg" alt="Описание фотографии 2">     
+            <div class="sensor-description">
+                <h2>Подробнее о датчике</h2>
+                <p>Наш датчик наполняемости мусорных контейнеров – это инновационное решение для оптимизации процессов сбора отходов. Он использует передовые технологии для точного измерения уровня заполнения и беспроводной передачи данных.  Благодаря прочному и водонепроницаемому корпусу, датчик надежно работает в любых погодных условиях.  Длительный срок службы батареи (до 5 лет) минимизирует затраты на обслуживание.  Интеграция с нашей платформой позволяет получать актуальную информацию о заполнении контейнеров в режиме реального времени,  что помогает оптимизировать маршруты сбора мусора и снизить затраты.</p>
+                <p>Узнайте больше о преимуществах нашего датчика и как он может помочь вашему бизнесу.</p>
+                <a href="#contacts" class="learn-more-button">Узнать больше</a>
             </div>
-            <div class="information-product"> 
-                <img class="information-product-photo" src="images for index.html/BMW2.jpg" alt="Описание фотографии 3">
-                <p>Этот датчик контролирует уровень заполнения бака, измеряя расстояние до мусора и передавая данные о проценте заполнения. Это позволяет оптимизировать вывоз мусора, предотвращая переполнение баков и загрязнение, а также снижая расходы на вывоз.</p> 
-                <button class="show-more-button">Показать весь текст</button> 
-            </div>
-            <div class="information-product revers">
-                <button class="show-more-button">Показать весь текст</button> 
-                <p>Этот датчик обеспечивает пожарную безопасность бака, реагируя на повышение температуры и дым, сигнализируя о возможном возгорании. Это позволяет быстро реагировать на опасность, предотвращая пожары, ущерб и загрязнение окружающей среды, повышая безопасность.</p>
-                <img class="information-product-photo" src="images for index.html/BMW1.jpg" alt="Описание фотографии 4">  
-            </div>
-    </div>
-
-    <div class="container-form">
-        <div class="form">
-            <form id="contact-form">
-            <h2>Напишите нам!</h2>
-            <div class="form-group">
-                <input type="text" id="name" name="name" required placeholder="Ваше имя"> 
-            </div>
-            <div class="form-group">
-                <input type="email" id="email" name="email" required placeholder="Ваша почта">
-            </div>
-            <div class="form-group">
-                <textarea id="message" name="message" required placeholder="Ваше сообщение"></textarea>
-            </div>
-            <button type="submit" id="submit-form">Отправить</button>
-            </form>
         </div>
+    </section>
+    
 
-        <div id="success-message" style="display: none; text-align: center;">
-            Сообщение успешно отправлено!
+    <section id="contacts" class="contacts" data-aos="fade-up">
+        <h2>Форма обратной связи</h2>
+        <form id="contact-form">
+          <div class="form-group">
+             <label for="name">Ваше имя:</label>
+              <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
           </div>
+          <div class="form-group">
+            <label for="email">Ваш email:</label>
+            <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Ваше сообщение:</label>
+            <textarea id="message" name="message" placeholder="Введите ваше сообщение" required></textarea>
+          </div>
+            <button type="submit">Отправить</button>
+        </form>
+    </section>
 
-      </div>
-
-    <footer class="page-footer" id="footer-teleport">
-        <div class="container-footer">
-            <div class="row">
-                <div class="col-md-4 OurInfo-container">
+    <footer>
+        <div class="container-footer" id="footer-teleport">
+            <div class="footer-row">  <!-- Изменено имя класса -->
+                <div class="footer-col">    <!-- Изменено имя класса -->
                     <h3>О нас</h3>
                     <p>EcoTechBin - это платформа для управления отходами, которая помогает компаниям сократить свой экологический след.</p>
                 </div>
-                <div class="col-md-4 contacts-container">
+                <div class="footer-col">   <!-- Изменено имя класса -->
                     <h3>Контакты</h3>
                     <ul class="contact-list">
                         <li><i class="fas fa-phone"></i> +7 (961) 295-11-32</li>
@@ -124,7 +154,7 @@
                         <li><i class="fas fa-map-marker-alt"></i> г. Таганрог, ул. Ленина, д. 1</li>
                     </ul>
                 </div>
-                <div class="col-md-4 contacts-container">
+                <div class="footer-col">    <!-- Изменено имя класса -->
                     <h3>Социальные сети</h3>
                     <ul class="social-links">
                         <li><a href="https://t.me/+l3NACUqNU69iNzFi"><i class="fab fa-telegram"></i></a></li>
@@ -132,101 +162,25 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+            <div class="footer-row"> <!-- Изменено имя класса -->
+                <div class="footer-col2"> <!-- Изменено имя класса -->
                     <p class="copyright">© 2024 EcoTechBin. Все права защищены.</p>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
-    <!-- Owl Carousel JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navList = document.querySelector('nav ul');
+      
+        menuToggle.addEventListener('click', () => {
+          navList.classList.toggle('active');
+        });
+      </script>
 
     <script>
-        $(document).ready(function(){
-            $('.owl-carousel').owlCarousel({
-                items: 1,
-                loop: true,
-                autoplay: true,
-                autoplayTimeout: 3000, // Время в миллисекундах между слайдами
-                autoplayHoverPause: true // Пауза при наведении курсора
-            });
-        });
-
-
-            // Обработчик клика на кнопку "гамбургера"
-            const hamburgerButton = document.querySelector('.hamburger-button');
-            const links = document.getElementById('links'); // получаем элемент #links
-
-            hamburgerButton.addEventListener('click', () => {
-            links.classList.toggle('show'); // переключаем класс 'show' у #links
-            });
-
-
-
-            const form = document.getElementById('contact-form');
-            const successMessage = document.getElementById('success-message');
-            const containerForm = document.querySelector('.form'); // Получаем родительский контейнер
-
-            form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Предотвращаем стандартное поведение формы
-
-            // ... ваш код для отправки данных формы ...
-
-            // После успешной отправки:
-            containerForm.style.display = 'none'; // Скрываем контейнер с формой
-            successMessage.style.display = 'block'; // Показываем сообщение об успешной отправке
-            form.reset(); // Очищаем поля формы (опционально)
-            });
-    </script>
-
-
-    <script>
-        const containers = document.querySelectorAll('.information-product');
-
-        const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-            } 
-        });
-        });
-
-        containers.forEach(container => {
-        observer.observe(container);
-        });
-    </script>
-
-    <script>
-        const showMoreButtons = document.querySelectorAll('.show-more-button');
-
-        showMoreButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const productContainer = button.closest('.information-product');
-            productContainer.classList.toggle('expanded');
-
-            if (productContainer.classList.contains('expanded')) {
-            button.textContent = 'Скрыть текст';
-            } else {
-            button.textContent = 'Показать весь текст';
-            }
-        });
-        });
-    </script>
-
-    <script src="scripts/scriptsLogin.js" defer></script>
+        AOS.init();
+     </script>
 </body>
-
 </html>

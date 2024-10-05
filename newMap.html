@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTechBin</title>
+    <link rel="stylesheet" href="css/styleMap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=ad764f20-3226-4b24-b28f-1e25c54f714a" type="text/javascript"></script>
+    <script src="//code.jivo.ru/widget/UyyphSPhiW" async></script>
+</head>
+<body>
+  <header>
+    <nav>
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+        <ul class="menu-header">
+            <li><a href="#" onclick="openSensorListModal()">Список датчиков</a></li>
+            <li><a href="#" onclick="openAddSensorModal()">Добавить Датчик</a></li>
+            <li><a href="#">Маршрут</a></li>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/login" style="color: rgb(0, 78, 0);">Перезайти</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+    <section>
+        <div id="map" style="width: 100vw; height: 100vh"></div>
+
+        <div id="route-alert">
+            <h2>Внимание!</h2>
+            <p id="alert-message"></p> <div id="low-charge-alert" style="display: none;"> 
+            <p>Обнаружены датчики с низким зарядом батареи.</p>
+            <button onclick="closeLowChargeAlert()">Закрыть</button>
+        </div> 
+            <button id="NextRoute" onclick="closeRouteAlert()">Продолжить</button>
+        </div>
+
+        <div id="addSensorModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeAddSensorModal()" style="font-size: 30px;">×</span>
+                <h2>Добавить датчик</h2>
+                <form id="addSensorForm">
+                    <label for="latitude">Широта:</label>
+                    <input type="text" id="latitude" name="latitude"  placeholder="00.000000" required><br><br>
+                    <label for="longitude">Долгота:</label>
+                    <input type="text" id="longitude" name="longitude" placeholder="00.000000" required><br><br>
+                    <label for="serialNumber">Серийный номер (6 цифр):</label>
+                    <input type="text" id="serialNumber" name="serialNumber" pattern="[0-9]{6}" placeholder="000000" required><br><br>
+                    <label for="sensorCode">Код:</label>
+                    <input type="text" id="sensorCode" name="sensorCode" required><br><br>
+                    <button type="submit">Добавить</button>
+                </form>
+            </div>
+        </div>
+
+
+        <div id="sensorListModal" class="modal"> 
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeSensorListModal()" style="font-size: 30px;">×</span>
+                <h2>Список датчиков</h2>
+                <input type="text" id="sensorSearch" placeholder="Поиск датчика...">
+                <ul id="sensorList">
+                    </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="scripts/newDatchik.js" defer></script>
+    <script src="scripts/scriptsMap.js" async></script>
+
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navList = document.querySelector('nav ul');
+      
+        menuToggle.addEventListener('click', () => {
+          navList.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

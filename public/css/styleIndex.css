@@ -1,488 +1,421 @@
-main{
-  display: flex;
+/* style.css */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #fff; 
+    color: #333;
+    line-height: 1.5;
 }
 
-li{
-  text-align: left;
+header {
+    padding: 8px;
+    background-color: #f0f0f0; 
 }
 
-.narrow-text {
-  max-width: 50%; /* Устанавливаем максимальную ширину текста, например, 50% от родительского контейнера */
-  margin: 0 auto; /* Центрируем текст по горизонтали */
+.menu-header a{
+    font-size: 16px;
 }
 
-#success-message {
-  color: #254e23;
-  font-family: "Noto Sans", sans-serif;
-  font-weight: 600;
-  font-size: 20px;
+nav {
+    display: flex;
+    justify-content: flex-end; /* Выравнивание по краям */
 }
 
-body{
-  background-image: url('1667397567_5-celes-club-p-fon-dlya-prezentatsii-po-ekologii-oboi-5.jpg');
-  background-size: cover;
-  overflow-x: hidden;
-}
-  
-  .fading-text {
-    display: block;
-    text-align: center;
-    animation: fadeInOut 5s infinite; /* Анимация затухания */
-    margin-top: -100px; /* Смещение вверх */
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 600;
-  }
-
-  @keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
-  }
-  
-  .arrow-down {
-    position: absolute;
-    bottom: 50px; /* Позиционирование стрелки снизу */
-    display: flex;
-    text-align: center; /* Выравнивание текста по центру */
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 600;
-  }
-
-  .arrow-down p {
-    margin-bottom: 0px;
-    color: black;
-  }
-  
-  .arrow-down img,
-  .arrow-down:hover p {
-    transition: transform 0.3s ease; /* Плавная анимация */
-  }
-  
-  .arrow-down:hover img,
-  .arrow-down:hover p
-   {
-    transform: translateY(-5px); /* Смещение стрелки вверх при наведении */
-  }
-  
-  header {
-    background-color: rgb(54, 53, 59);
-    height: 70px;
-    border-bottom: 1px solid white;
-  }
-
-  footer{
-    background-color: rgb(54, 53, 59);
-    height: auto;
-    text-align: left;
-  }
-
-  @media (min-width: 1440px) {
-    .page-header--blog .container {
-      max-width: 1920px;
-    }
-  }
-
-  .container-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: space-between;
-    width: auto;
-  }
-
-  #container-section{
-    display: flex;
-    align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: space-between;
-    width: auto;
-    flex-direction: column;
-  }
-  
-  #links {
-    display: flex;
-    gap: 20px;
-  }
-  
-
-  .contact-list,
-  .social-links
-   {
-    padding-left: 0;
-  }
-
-  #userpanel{
-    display: flex;
-    align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: right;
-    width: 200px;
-  }
-  
-  .navigation {
-    background-color: rgb(54, 53, 59);
-    border-radius: 5px;
-    border: none;
+.login-button {
+    padding: 5px 10px;
+    background-color: #4CAF50; 
     color: white;
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 600;
-    font-size: 17px;
-    margin: 0 20px 0 20px;
-    transition: all 0.3s ease; /* Плавная анимация */
+    text-decoration: none;
+    border-radius: 5px;
 }
 
-  .navigation:hover {
-    background-color: rgb(49, 49, 53); /* Замените на желаемый цвет */
-    transform: translateY(-2px); /* Небольшое смещение вверх при наведении */
-  }
-  
-  a {
-    text-decoration: none !important;
+nav a {
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none; /* Убираем подчеркивание */
+    color: black;  /* Устанавливаем черный цвет текста */
+    font-weight: bold; /* Делаем текст жирным */
+    margin: 0px 10px 0px 10px;
+}
+
+
+/* about section */
+.about {
+    min-height: 80vh; /* Занимает всю высоту экрана */
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    background-size: cover; /*  Фоновое изображение растягивается на весь блок */
+    background-position: center; /* Фоновое изображение центрируется */
+}
+
+
+.about-text {
+  flex: 1;
+  /* Добавьте отступы или другие стили по необходимости */
+  padding: 20px; /*  Например, отступы */
+}
+
+.about-image {
+    flex: 1;
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.about-text h1 {
+    animation: fadeInOut 4s infinite; /*  4 секунды на цикл */
+    font-size: 40px;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; } /* Начало: невидимый */
+    50% { opacity: 1; } /* Середина: видимый */
+    100% { opacity: 0; } /* Конец: невидимый */
+}
+
+/*  Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column; /*  Располагаем текст и изображение друг под другом */
+    text-align: center;    /*  Центрируем текст */
   }
 
-  
-  .container-form {
-    background-color: rgba(255, 255, 255, 0.5); 
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 95%; 
-    margin: 0 auto 20px; /* Added bottom margin */
+  .about-image { /* Можно добавить отступы сверху/снизу */
     margin-top: 20px;
   }
+}
 
-  .start-window{
-    width: 100vw; /* Устанавливаем ширину контейнера равной 100% ширины области просмотра */
-    height: 98vh; /* Устанавливаем высоту контейнера равной 100% высоты области просмотра */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Центрируем элементы по вертикали */
-    position: relative; /* Позиционирование для стрелки */
-  }
-    
-  #contact-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
+.features {
+  padding: 40px;
+  text-align: center;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Адаптивная сетка */
+  gap: 20px;
+}
+
+
+
+.feature-item {
+    text-align: center;  /* Центрирование текста в каждом элементе */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.feature-item i {
+    font-size: 3em; /* Увеличиваем размер иконок */
+    color: #4CAF50; /* Цвет иконок */
+    margin-bottom: 10px;
+}
+
+.application {
+    padding: 40px;
+    text-align: center; /* Центрирование заголовка */
+}
+
+.application-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px;
+    margin-top: 20px; /* Отступ сверху от заголовка */
+}
+
+.application-item {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.application-item i {
+    font-size: 3em;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.application-item img{
+    height: auto;
+    width: 100%;
+}
+/*Форма обратной связи*/
+
+.contacts {
+    padding: 40px;
+    background-color: #fff; /* Легкий серый фон для выделения */
+}
+
+.contacts h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.contacts form {
+    max-width: 500px; 
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Легкая тень */
+}
+
+.form-group {
     margin-bottom: 15px;
-  }
-  
-  label {
+}
+
+.form-group label {
     display: block;
     margin-bottom: 5px;
-  }
-  
-  input, textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  textarea {
-    height: 100px;
-  }
-  
-  button[type="submit"] {
-    background-color: #4CAF50; /* Green */
-    font-family: "Noto Sans", sans-serif;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    margin-left: auto;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #45a049; /* Darker green on hover */
-    font-family: "Noto Sans", sans-serif;
-  }
+    font-weight: bold; /* Жирный шрифт для меток */
+}
 
-  #submit-form{
-    width: 200px;
-  }
-  
-  .contact-form .form-control {
-    border-radius: 5px;
-  }
-  
-  .page-footer {
-    background-color: rgb(54, 53, 59);
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px; /* Увеличенный padding */
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Скругление углов полей ввода */
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    min-height: 120px; /* Минимальная высота для textarea */
+    resize: vertical; /* Разрешить изменение размера только по вертикали */
+}
+
+
+.contacts button {
+    padding: 12px 24px; /* Увеличенный padding */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px; /* Скругление углов кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
+    font-size: 16px;
+}
+
+.contacts button:hover,
+.learn-more-button:hover {
+    background-color: #45a049; /* Более темный зеленый при наведении */
+}
+
+/*Подвал*/
+
+footer {
+    background-color: #333;
     color: #fff;
+}
+
+.container-footer {
+    margin: 0 auto;
     padding: 40px 20px 0 20px;
-  }
-  
-  .contact-list li {
+}
+
+.footer-row { /* Изменено имя класса */
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;
+}
+
+
+.footer-col { /* Изменено имя класса */
+    width: calc(33.33% - 50px);  /* Ширина каждой колонки с учетом отступов*/
+    margin: 0 20px 0 20px;
+}
+
+
+@media (max-width: 768px) {
+    .footer-col {  /* На мобильных устройствах колонки занимают всю ширину */
+        width: 100%;
+    }
+}
+
+.contact-list li, .social-links li {
     list-style: none;
     margin-bottom: 10px;
-  }
-  
-  .contact-list i {
+}
+
+.social-links a {
+    color: #fff; /* Цвет ссылок в соцсетях */
+    font-size: 1.5em; /* Размер иконок соцсетей */
     margin-right: 10px;
-  }
-  
-  .social-links li {
-    list-style: none;
-    display: inline-block;
-    margin-right: 20px;
-  }
-  
-  .social-links a {
-    color: #fff;
-    font-size: 24px;
-  }
-  
-  .copyright {
-    text-align: center;
-    margin-top: 20px;
-  }
+}
 
-  .contacts-container {
+.social-links,
+.contact-list{
+    padding-left: 0px;
+}
+
+.copyright {
+  text-align: center;  /* Центрируем текст копирайта */
+  margin-top: 20px;    /* Отступ сверху */
+}
+
+/*Информация о датчиках*/
+
+.sensor-details {
+    background-color: #333; /* Черный фон */
+    color: #fff; /* Белый текст */
+    padding: 40px 0;
+}
+
+.sensor-details-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
-  }
-
-  .OurInfo-container {
-    width: 100%; /* Занимает всю доступную ширину */
-    text-align: center; /* Выравнивает заголовок по центру */
-  }
-  
-  .OurInfo-container h3 {
-    text-align: center; /* Выравнивает заголовок по центру */
-  }
-  
-  .OurInfo-container p {
-    text-align: justify; /* Выравнивает текст по ширине */
-    text-indent: 20px;
-  }
-
-  .container {
-    display: flex;
-    align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: space-between;
-    width: auto;
-  }
-
-/* Стили для кнопки "гамбургера" */
-.hamburger-button {
-  filter: invert(1);
-  display: none; /* По умолчанию скрываем кнопку на больших экранах */
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease; /* Плавная анимация */
+    max-width: 90%;
+    margin: 0 auto;
+    gap: 40px;  /* Пробел между картинкой и описанием */
 }
 
-.hamburger-button:hover{
-  background-color: rgb(49, 49, 53); /* Замените на желаемый цвет */
-  transform: translateY(-2px); /* Небольшое смещение вверх при наведении */
+.sensor-image {
+    flex: 1; /* Изображение занимает доступное пространство */
 }
 
-/* Стили для навигации */
-.navbar-collapse {
-  display: flex; 
-  align-items: center; 
+.sensor-image img {
+    max-width: 100%;
+    height: auto;
+    display: block; /*  Чтобы убрать лишний отступ снизу */
 }
 
-/* Стили для кнопок */
-.navigation {
-  /* ... ваши стили для кнопок ... */
-  margin-left: 20px; /* Отступ между кнопками */
-}
-
-/* Стили для профиля пользователя */
-#userpanel {
-  display: flex;
-  align-items: center; 
-  margin-left: 20px; /* Отступ от кнопок */
-}
-
-#SignInAdmin1,
-#SignInAdmin{
-  color:  #C7F9CC;
-}
-
-/* Медиа-запросы для адаптивности */
-@media (max-width: 768px) { 
-  .hamburger-button {
-    display: block; /* Показываем кнопку на маленьких экранах */
-  }
-
-  #SignInAdmin1 {
-    display: block;
-    position: relative; /* Позиционирование для псевдоэлемента */
-  }
-
-  #SignInAdmin1::before { /* Создаем псевдоэлемент для полоски */
-    content: ""; /* Обязательное свойство для псевдоэлементов */
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 180%;
-    height: 1px; /* Толщина полоски */
-    background-color: #ffffff; /* Цвет полоски */
-    transform: translateX(-50%) translateY(-100%); /* Сдвигаем полоску вверх за границу кнопки */
-  }
-
-  .narrow-text {
-    max-width: 90%; /* Устанавливаем максимальную ширину текста, например, 50% от родительского контейнера */
-  }
-
-  #links,
-  #userpanel {
-    display: none; /* Скрываем кнопки */
-    /* НОВЫЙ CSS: добавляем стили для отображения меню при нажатии на кнопку */
-    position: absolute; 
-    top: 70px; /* Позиционируем меню под шапкой */
-    right: 0; 
-    width: auto; 
-    background-color: rgb(54, 53, 59);
-    flex-direction: column; /* Располагаем элементы меню вертикально */
-    z-index: 10;
-    transition: transform 0.3s ease-in-out; /* Добавляем плавную анимацию */
-    gap: 5px;
-  }
-
-  /* НОВЫЙ CSS: показываем меню, когда у #links есть класс show */
-  #links.show {
-    display: flex;
-    justify-content: center; /* Центрирует элементы по горизонтали */
-    align-items: center; /* Центрирует элементы по вертикали (опционально) */
-    border-bottom-left-radius: 5px; /* Радиус скругления для нижнего левого угла */
-    border-bottom-right-radius: 5px; /* Радиус скругления для нижнего правого угла */
-  }
-
-  .navigation, #userpanel > div {
-    margin-bottom: 10px; /* Отступ между элементами меню */
-  }
-
-
-  .information-product p {
-    margin-top: 5px;
-    font-size: 18px;
-    /* ... ваш существующий CSS для параграфа ... */
-    overflow: hidden; /* Скрываем текст, выходящий за пределы контейнера */
-    text-overflow: ellipsis; /* Добавляем многоточие в конце обрезанного текста */
-    display: -webkit-box; /* Для WebKit браузеров */
-    -webkit-line-clamp: 3; /* Ограничиваем количество строк до 3 */
-    -webkit-box-orient: vertical;
-  }
-
-  .information-product .show-more-button {
-    margin-bottom: 30px;
-    margin-top: 0px;
-    display: block; /* Показываем кнопку */
+.image-caption {
+    font-style: italic;
+    text-align: center;
     margin-top: 10px;
-    background-color: #4CAF50; /* Green */
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  .information-product .show-more-button:hover {
-    background-color: #45a049; /* Darker green on hover */
-  }
-
-  .information-product.expanded p {
-    -webkit-line-clamp: unset; /* Снимаем ограничение на количество строк */
-    overflow: visible; /* Показываем весь текст */
-  }
-
-  .information-product-photo{
-    width: 90%;
-    height: 90%;
-  }
-  
-}
-
-@media (min-width: 768px) { /* Или другое значение ширины экрана */
-  #SignInAdmin1 {
-    display: none;
-  }
-}
-
-.page-header--blog{
-  display: flex;
-  justify-content: center;
-}
-
-.first{
-  display: flex;
-  flex-direction: column; /* Располагаем элементы по вертикали */
 }
 
 
-
-.information-product{
-  display: flex;
-  flex-direction: row;
-  justify-content: center; /* Центрирование по горизонтали */
-  align-items: center; /* Центрирование по вертикали */
-  text-align: center; /* Центрирование текста внутри контейнера */
-
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
+.sensor-description {
+    flex: 1;  /* Описание занимает доступное пространство */
 }
 
-.information-product p{
-  margin-left: 20px;
-  margin-right: 20px;
-  height: 100%; /* Занимаем всю высоту контейнера */ 
-  margin-bottom: 0px;
+.sensor-description h2 {
+    margin-bottom: 20px;
 }
 
-.information-product.show {
-  opacity: 1;
-}
-
-@media (max-width: 1260px) { /* Или другое значение ширины экрана */
-
-  .information-product{
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: center; /* Центрирование по вертикали */
-    text-align: center; /* Центрирование текста внутри контейнера */
-  }
-
-  .revers{
-    flex-direction: column-reverse;
-  }
-}
-
-@media (max-width: 1260px) and (min-width: 769px){
-  .information-product p{
+.sensor-description p{
     font-size: 20px;
-    margin-top: 10px;
-    margin-bottom: 30px;
-  }
-
-  .information-product-photo{
-    width: 60%;
-    height: 60%;
-  }
 }
 
-@media (min-width: 1260px){
-  .information-product p{
-    font-size: 24px;
-  }
-
-  .information-product-photo{
-    width: 45%;
-    height: 45%;
-  }
+.learn-more-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
+    font-size: 16px;
 }
 
-.show-more-button{
-  display: none;
+
+
+@media (max-width: 768px) { /* На мобильных */
+    .sensor-details-container {
+        flex-direction: column; /* Картинка и описание друг под другом */
+    }
+
+    .sensor-image, .sensor-description {
+        flex: none; /* Отменяем flex-grow */
+        width: 100%; /* Занимают всю ширину */
+    }
+
+    .sensor-image {
+        margin-bottom: 20px;
+    }
+
+    .sensor-description p{
+        font-size: 18px;
+        text-align: justify;
+        text-indent: 20px;
+    }
+    
+    .sensor-description h2{
+        text-align: center;
+    }
+
+}
+
+@media (min-width: 769px) { /* На мобильных */
+    .application-item p,
+    .feature-item p,
+    .form-group,
+    .about-text p,
+    .footer-col p,
+    .learn-more-button,
+    .contacts button,
+    .form-group input,
+    .form-group textarea{
+        font-size: 18px;
+    }
+
+    .application-item h3,
+    .feature-item h3,
+    .footer-col h3{
+        font-size: 20px;
+    }
+}
+
+
+/*Гамбургер меню*/
+
+/*  Обычные стили для десктопа */
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+.menu-toggle i {
+    font-size: 2em; /*  Или другой размер */
+}
+
+.menu-toggle { /* Стили для кнопки "гамбургера" */
+    display: none; /* Показываем кнопку на мобильных */
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) { /* Или другое значение ширины */
+
+    .menu-toggle { /* Стили для кнопки "гамбургера" */
+        display: block; /* Показываем кнопку на мобильных */
+        cursor: pointer;
+    }
+
+    nav ul {
+        display: none; /* Скрываем ссылки по умолчанию */
+        flex-direction: column; /* Располагаем ссылки вертикально */
+        position: absolute; 
+        top: 50px; /* Позиционируем меню под кнопкой */
+        left: 0;
+        width: 100%;
+        background-color: #f0f0f0;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    nav li {
+        margin: 10px 0;
+    }
+
+
+    nav ul.active {  /*  Стили для открытого меню */
+        display: flex;
+        z-index: 10; /*  Чем больше значение, тем выше элемент */
+    }
+
+
 }

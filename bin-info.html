@@ -1,0 +1,23 @@
+<div id="bin-info-content">
+    <h2>Контейнер номер: <span id="bin-serial-number"></span></h2>
+    <div style="display: flex; gap: 40px;">
+        <div style="margin-right: 20px;">
+            <canvas id="fullnessChart" width="100" height="100"></canvas>
+            <p>Наполненность: <span id="bin-fullness"></span>%</p>
+            <p id="fullness-alert" style="color: red; display: none;">Контейнер заполнен!</p>
+        </div>
+        <div>
+            <canvas id="chargeChart" width="100" height="100"></canvas>
+            <p>Заряд: <span id="bin-charge-level"></span>%</p>
+            <p id="charge-alert" style="color: orange; display: none;">Требуется зарядка датчика!</p>
+        </div>
+    </div>
+    <div>
+        <label for="editLatitude">Широта:</label>
+        <input type="text" id="editLatitude">
+        <label for="editLongitude">Долгота:</label>
+        <input type="text" id="editLongitude">
+    </div>
+    <button id="update-location-button">Изменить местоположение</button>
+    <button onclick="closeBinInfo()">Закрыть</button>
+</div>

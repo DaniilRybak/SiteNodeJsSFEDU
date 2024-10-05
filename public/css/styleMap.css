@@ -1,251 +1,329 @@
-main{
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #333;
+  line-height: 1.5;
+  overflow: hidden; /* Убираем прокрутку у body */
+}
+
+
+/*Шапка сайта*/
+header {
+  padding: 8px;
+  background-color: #f0f0f0;
+}
+
+.menu-header a{
+  font-size: 16px;
+}
+
+nav {
   display: flex;
+  justify-content: flex-end;
 }
 
-  .text-container {
-    width: auto; 
-    height: 200px; 
-    overflow: hidden;
-
-    /* Центрирование на экране */
-    position: absolute;  /* Позиционируем относительно окна браузера */
-    top: 35%;            /* Сдвигаем вниз на 50% от верха окна */
-    left: 50%;           /* Сдвигаем вправо на 50% от левого края окна */
-    transform: translate(-50%, -50%); /* Сдвигаем на половину собственной ширины и высоты */
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-  
-  @keyframes fadeInOut {
-    0%, 100% {
-      opacity: 0; /* Текст невидимый в начале и в конце */
-      transform: translateY(10px); /* Текст немного смещен вниз */
-    }
-    20%, 80% {
-      opacity: 1; /* Текст полностью видимый */
-      transform: translateY(0); /* Текст на месте */
-    }
-  }
-  
-  header {
-    background-color: rgb(54, 53, 59);
-    height: 70px;
-    border-bottom: 1px solid white;
+
+nav li {
+  margin: 0 10px;
+}
+
+nav a {
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin: 0px 10px 0px 10px;
+}
+
+.menu-toggle i {
+  font-size: 2em;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
   }
 
-  @media (min-width: 1440px) {
-    .page-header--blog .container {
-      max-width: 1920px;
-    }
-  }
-
-  .container {
-    display: flex;
-    align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: space-between;
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 0;
     width: 100%;
-  }
-  
-  #links {
-    display: flex;
-    gap: 20px;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 10px 0;
   }
 
-  #userpanel{
-    display: flex;
-    align-items: center;    /* Центрируем элементы по вертикали */
-    justify-content: right;
-    width: 200px;
+  nav li {
+    margin: 10px 0;
   }
-  
-  .navigation {
-    background-color: rgb(54, 53, 59);
-    border-radius: 5px;
-    border: none;
-    color: white;
-    font-family: "Noto Sans", sans-serif;
-    font-weight: 600;
-    font-size: 17px;
-    margin: 0 20px 0 20px;
-    transition: all 0.3s ease; /* Плавная анимация */
+
+  nav ul.active {
+    display: flex;
+    z-index: 10;
+  }
+}
+/*Шапка сайта*/
+
+
+.navigation {
+  background-color: rgb(54, 53, 59);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 0 20px 0 20px;
+  transition: all 0.3s ease;
 }
 
-  .navigation:hover {
-    background-color: rgb(49, 49, 53); /* Замените на желаемый цвет */
-    transform: translateY(-2px); /* Небольшое смещение вверх при наведении */
-  }
-  
-  a {
-    text-decoration: none !important;
-  }
-  
-  body {
-    overflow: hidden; 
-  }
+.navigation:hover {
+  background-color: rgb(49, 49, 53);
+  transform: translateY(-2px);
+}
+
+a {
+  text-decoration: none !important;
+}
+
+
+
 /* CSS стили для всплывающей подсказки */
 .bin-info {
-    position: fixed;
-    left: 0;
-    /* Убираем 'top: 0' */ 
-    bottom: 0; /* Фиксируем к низу */
-    width: 500px;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    display: none;
-    /* Добавляем отступ сверху, равный высоте шапки + небольшой запас */
-    top: 75px; /* Замените 80px на фактическую высоту вашей шапки + запас */
-    }
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 500px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  top: 75px;
+}
 
-    
-    .bin-info button {
-    position: absolute;
-    bottom: 10px; /* Отступ от нижнего края */
-    left: 50%; /* Центрируем по горизонтали */
-    transform: translateX(-50%); /* Дополнительное центрирование */
-    width: 90%; /* Ширина кнопки */
-    background-color: #f44336;
-    color: white;
-    padding: 10px 0;
-    border: none;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 0;
-    }
+.bin-info .bbb{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-    /* Стили для всплывающего окна */
-    #route-alert {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 30%;
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        display: none;
-        z-index: 99;
-    }
-
-    #route-alert h2 {
-        color: #f44336;
-        margin-bottom: 10px;
-    }
-
-    #route-alert button {
-        background-color: #f44336;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-
-    /* Стили для кнопки "гамбургера" */
-.hamburger-button {
-  filter: invert(1);
-  display: none; /* По умолчанию скрываем кнопку на больших экранах */
-  background: none;
+.bin-info button {
+  width: 90%;
+  background-color: #f44336;
+  color: white;
+  padding: 10px 0;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease; /* Плавная анимация */
+  text-align: center;
+  border-radius: 0;
 }
 
-.hamburger-button:hover{
-  background-color: rgb(49, 49, 53); /* Замените на желаемый цвет */
-  transform: translateY(-2px); /* Небольшое смещение вверх при наведении */
+/* Стили для всплывающего окна */
+#route-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 99;
 }
 
-/* Стили для навигации */
-.navbar-collapse {
-  display: flex; 
-  align-items: center; 
+#route-alert h2 {
+  color: #f44336;
+  margin-bottom: 10px;
 }
 
-/* Стили для кнопок */
-.navigation {
-  /* ... ваши стили для кнопок ... */
-  margin-left: 20px; /* Отступ между кнопками */
+#route-alert button {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-/* Стили для профиля пользователя */
-#userpanel {
-  display: flex;
-  align-items: center; 
-  margin-left: 20px; /* Отступ от кнопок */
-}
 
-#SignInAdmin1{
-  color:  #C7F9CC;
-}
 
-/* Медиа-запросы для адаптивности */
-@media (max-width: 768px) { 
-  .hamburger-button {
-    display: block; /* Показываем кнопку на маленьких экранах */
-  }
-
+@media (max-width: 768px) {
   .bin-info {
     width: 100%;
-    }
+  }
 
-  #route-alert{
+  #route-alert {
     width: 85%;
   }
+}
 
-  #SignInAdmin1 {
-    display: block;
-    position: relative; /* Позиционирование для псевдоэлемента */
-  }
+/*Добавление датчика*/
 
-  #SignInAdmin1::before { /* Создаем псевдоэлемент для полоски */
-    content: ""; /* Обязательное свойство для псевдоэлементов */
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 180%;
-    height: 1px; /* Толщина полоски */
-    background-color: #ffffff; /* Цвет полоски */
-    transform: translateX(-50%) translateY(-100%); /* Сдвигаем полоску вверх за границу кнопки */
-  }
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+  z-index: 1000; /* Высокий z-index, чтобы окно было поверх всего */
+}
 
-  #links,
-  #userpanel {
-    display: none; /* Скрываем кнопки */
-    /* НОВЫЙ CSS: добавляем стили для отображения меню при нажатии на кнопку */
-    position: absolute; 
-    top: 70px; /* Позиционируем меню под шапкой */
-    right: 0; 
-    width: auto; 
-    background-color: rgb(54, 53, 59);
-    flex-direction: column; /* Располагаем элементы меню вертикально */
-    z-index: 100;
-    transition: transform 0.3s ease-in-out; /* Добавляем плавную анимацию */
-    gap: 5px;
-  }
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Центрируем окно */
+  max-width: 400px;
+  width: 85%; /* Мобильная адаптивность */
+}
 
-  /* НОВЫЙ CSS: показываем меню, когда у #links есть класс show */
-  #links.show {
+.modal-content h2{
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Минималистичный стиль */
+#addSensorModal label, #addSensorModal input, #addSensorModal button {
+  display: block;
+  width: 100%;  /* Занимают всю ширину */
+  margin-bottom: 10px;
+  padding: 8px;
+  box-sizing: border-box;  /*  padding и border включаются в общую ширину */
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#addSensorModal button {
+  background-color: #4CAF50; /* Зеленый цвет кнопки */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+
+.bin-info-window {
+    width: 300px; /* Или другая желаемая ширина */
+}
+
+.charts {
     display: flex;
-    justify-content: center; /* Центрирует элементы по горизонтали */
-    align-items: center; /* Центрирует элементы по вертикали (опционально) */
-    border-bottom-left-radius: 5px; /* Радиус скругления для нижнего левого угла */
-    border-bottom-right-radius: 5px; /* Радиус скругления для нижнего правого угла */
-  }
-
-  .navigation, #userpanel > div {
-    margin-bottom: 10px; /* Отступ между элементами меню */
-  }
+    justify-content: space-around;
+    margin-bottom: 30px;
 }
 
-@media (min-width: 768px) { /* Или другое значение ширины экрана */
-  #SignInAdmin1 {
-    display: none;
-  }
+.chart-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-container p{
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.Button-all,
+#addSensorForm button { /* Добавляем стили для кнопок внутри .buttons */
+    background-color: #4CAF50; /* Красный фон */
+    color: white; /* Белый текст */
+    border: none; /* Убираем границу */
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer; /* Курсор в виде руки */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета при наведении */
+    font-size: 16px;
+}
+
+.Button-all:hover,
+#addSensorForm button:hover {
+    background-color: #45a049; /* Более темный зеленый при наведении */
 }
 
 
-.page-header--blog{
+/*баллон добавления при клике*/
+.add-sensor-balloon{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 16px;
+}
+
+/*List datchiks*/
+#sensorList {
+  list-style: none; /* Убираем маркеры списка */
+  padding: 0;
+  margin-top: 0; /* Убираем отступ сверху */
+  max-height: 300px; /* Устанавливаем максимальную высоту списка */
+  overflow-y: auto; /* Добавляем вертикальную прокрутку */
+}
+
+#sensorSearch{
+  width: 98%;
+  height: 30px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#sensorList li {
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9; /* Светло-серый фон */
+  cursor: pointer; /* Курсор - указатель */
+  transition: background-color 0.3s ease; /* Плавное изменение фона */
+}
+
+#sensorList li:hover {
+  background-color: #e9e9e9; /* Более темный фон при наведении */
+}
+
+#sensorList a {
+  color: #333; /* Темно-серый цвет ссылок */
+  text-decoration: none; /* Убираем подчеркивание ссылок */
 }
