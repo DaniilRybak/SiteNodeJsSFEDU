@@ -7,7 +7,7 @@ const session = require('express-session');
 
 const secretKey = crypto.randomBytes(64).toString('hex');
 
-const hostname = '0.0.0.0';
+const hostname = 'ecotechbin.ru';
 const port = 3000; // Замените на желаемый порт
 
 // Настройка сессии
