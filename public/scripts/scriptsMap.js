@@ -63,6 +63,24 @@ let placemarkColors = [
 ];
 let multiRoute; // Объявляем multiRoute здесь
 
+// Создаем элемент для модального окна подтверждения
+const confirmModal = document.createElement('div');
+confirmModal.id = 'confirmModal';
+confirmModal.className = 'modal';
+confirmModal.innerHTML = `
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeAddSensorModal()" style="font-size: 30px;">×</span>
+    <p style="margin-top: 30px;">Вы уверены, что хотите удалить маршрут с карты?</p>
+    <div class="modal-content-routes">
+        <button id="confirmYes" class="Button-all" style="background-color: #c71313f1;">Да</button>
+        <button id="confirmNo" class="Button-all">Нет</button>
+    </div>
+  </div>
+`;
+document.body.appendChild(confirmModal);
+let routeDisplayed = false;
+let wayPointsId = [];
+
 ymaps.ready(init);
 
 function init() {
@@ -86,7 +104,7 @@ function init() {
     updateMapData(); // Первоначальная загрузка данных
 
     // Обновляем данные каждые 10 секунд (10000 миллисекунд)
-    setInterval(updateMapData, 5000); 
+    setInterval(updateMapData, 5000);
 
     myMap.events.add('contextmenu', function (e) {
         var coords = e.get('coords');
@@ -123,63 +141,111 @@ function init() {
 
         // Наша кнопка "Построить маршрут"
         const myRouteButton = document.getElementById('myRouteButton');
-        const nextRouteButton = document.getElementById('NextRoute');
 
         function addRouteButtonClickHandler(button) {
-        button.addEventListener('click', () => {
-            if (multiRoute) { 
-                myMap.geoObjects.remove(multiRoute);
-                multiRoute = null;
-            } else {
+            button.addEventListener('click', () => {
+              if (multiRoute) {
+                // Показываем модальное окно подтверждения
+                confirmModal.style.display = 'block'; 
+          
+                // Обработчик для кнопки "Да"
+                document.getElementById('confirmYes').onclick = () => {
+
+                    if (wayPointsId.length === 0) {
+                        console.log("Массив пуст");
+                        } else {
+                            for (let i = 0; i < wayPointsId.length; i++) {
+                                binEmptied(wayPointsId[i], false);
+                              }
+                            wayPointsId = [];
+                        }
+
+                    myMap.geoObjects.remove(multiRoute);
+                    multiRoute = null;
+                    routeDisplayed = false;
+                    confirmModal.style.display = 'none'; // Скрываем модальное окно
+                };
+          
+                // Обработчик для кнопки "Нет"
+                document.getElementById('confirmNo').onclick = () => {
+                  confirmModal.style.display = 'none'; // Скрываем модальное окно
+                };
+              } else {
                 buildRoute();
-            }
-        });
-    }
+                routeDisplayed = true;
+              }
+            });
+          }
 
     addRouteButtonClickHandler(myRouteButton);
-    addRouteButtonClickHandler(nextRouteButton);
 }
+
 
 function buildRoute() {
     ymaps.geolocation.get({
-        provider: 'browser',
-        mapStateAutoApply: false
+      provider: 'browser',
+      mapStateAutoApply: false
     }).then(function (result) {
-        let wayPoints = [result.geoObjects.get(0).geometry.getCoordinates()]; // Начинаем с текущего положения
+      let wayPoints = [result.geoObjects.get(0).geometry.getCoordinates()];
 
-        // Получаем координаты всех красных и оранжевых маркеров
-        clusterer.getGeoObjects().forEach(geoObject => {
-            if (geoObject.options.get('iconColor') === placemarkColors[1] ||
-                geoObject.options.get('iconColor') === placemarkColors[2]) {
-                wayPoints.push(geoObject.geometry.getCoordinates());
-            }
-        });
+      // Получаем координаты красных и оранжевых маркеров, которые НЕ находятся в маршруте
+      clusterer.getGeoObjects().forEach(geoObject => {
+        if ((geoObject.options.get('iconColor') === placemarkColors[1] ||
+            geoObject.options.get('iconColor') === placemarkColors[2]) &&
+            !geoObject.properties.get('on_route'))
+            { // Проверяем on_route
+          wayPoints.push(geoObject.geometry.getCoordinates());
+          wayPointsId.push(geoObject.properties.get('id'));
 
-        // Если есть хотя бы одна точка для маршрута (кроме начальной)
-        if (wayPoints.length > 1) {
-        
-            // Используем ymaps.route для построения маршрута
-            ymaps.route(wayPoints, {
-                mapState: { zoom: 15 },
-                multiRoute: true,
-                routingMode: 'auto'
-            }).then(function (route) {
-                multiRoute = route;
-                myMap.geoObjects.add(multiRoute);
-
-                // Выводим информацию о каждом маршруте
-                route.getRoutes().each(function (route) {
-                    console.log("Маршрут:");
-                    console.log("Длина:", route.getLength()); // Длина маршрута в метрах
-                    console.log("Время:", route.getDuration()); // Время в пути в секундах
-                });
-            });
-        } else {
-            // Обработка случая, когда нет точек для маршрута
-            alert("Нет контейнеров для сбора!");
+          binEmptied(geoObject.properties.get('id'), true);
         }
+      });
+  
+      // Если есть хотя бы одна точка для маршрута (кроме начальной)
+      if (wayPoints.length > 1) {
+        // Используем ymaps.route для построения маршрута
+        ymaps.route(wayPoints, {
+          mapState: { zoom: 15 },
+          multiRoute: true,
+          routingMode: 'auto'
+        }).then(function (route) {
+          if (multiRoute) {
+            myMap.geoObjects.remove(multiRoute);
+          }
+          multiRoute = route;
+          myMap.geoObjects.add(multiRoute);
+          
+  
+          // Выводим информацию о каждом маршруте
+          route.getRoutes().each(function (route) {
+            console.log("Маршрут:");
+            console.log("Длина:", route.getLength());
+            console.log("Время:", route.getDuration());
+          });
+        });
+      } else {
+        alert("Нет доступных контейнеров для добавления в маршрут!");
+      }
     });
-}
+  }
+
+
+function updateBinOnRouteStatus(binId, onRoute) {
+    fetch(`/api/bins/${binId}/on_route`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ on_route: onRoute })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Ошибка обновления on_route');
+      }
+    })
+    .catch(error => {
+      console.error('Ошибка обновления on_route:', error);
+      // Дополнительная обработка ошибок, если необходимо
+    });
+  }
 
 
 function updateMapData() {
@@ -199,7 +265,10 @@ function updateMapData() {
             let iconColor;
 
             // Определение цвета маркера
-            if (bin.chargeLevel < 20) {
+            if(bin.on_route){
+                iconColor = '#3388ff';
+            }
+            else if (bin.chargeLevel < 20) {
                 iconColor = placemarkColors[2]; // Оранжевый, если низкий заряд
                 lowChargeCount++;
             } else if(bin.fullness > 80) {
@@ -210,10 +279,22 @@ function updateMapData() {
                 iconColor = placemarkColors[0];
             }
 
-            // Создание маркера
-            var marker = new ymaps.Placemark([bin.latitude, bin.longitude], {}, {
+            var marker = new ymaps.Placemark([bin.latitude, bin.longitude], {
+                id: bin.id,
+                on_route: bin.on_route
+              }, {
                 iconColor: iconColor
-            });
+              });
+
+            if ((bin.on_route && bin.fullness <= 10) || (bin.on_route && bin.chargeLevel >= 90 && bin.fullness <= 10)) { // Проверяем, был ли он в маршруте и стал ли пустым
+                binEmptied(bin.id, false);
+                wayPointsId = wayPointsId.filter(number => number !== bin.id);
+            }
+
+            if ((wayPointsId.length === 0) && multiRoute) {
+                myMap.geoObjects.remove(multiRoute);
+                multiRoute = null;
+            }
 
             // Обработчик клика на маркер
             marker.events.add('click', function () {
@@ -245,7 +326,7 @@ function updateMapData() {
                             <input type="text" id="editLongitude-${bin.id}" value="${bin.longitude}"  style="font-size: 16px;">
                         </div>
                         <div class="buttons">
-                            <button class="Button-all" onclick="updateBinLocation(${bin.id})">Изменить местоположение</button>
+                            <button class="Button-all" style="background-color: #c71313f1;" onclick="updateBinLocation(${bin.id}, ${bin.latitude}, ${bin.longitude})">Изменить местоположение</button>
                             <button class="Button-all" onclick="closeBinInfo()">Закрыть</button>
                         </div>
                     </div>
@@ -287,7 +368,7 @@ function updateMapData() {
         .catch(error => console.error('Ошибка при получении данных:', error));
     }
 
-function updateBinLocation(binId) {
+function updateBinLocation(binId, oldLatitude, oldLongitude) {
     const newLatitude = document.getElementById(`editLatitude-${binId}`).value;
     const newLongitude = document.getElementById(`editLongitude-${binId}`).value;
     
@@ -295,6 +376,13 @@ function updateBinLocation(binId) {
     if (!newLatitude || !newLongitude) {
         alert('Введите корректные координаты');
         return;
+    }
+
+    // Сравниваем координаты
+    if (newLatitude == oldLatitude && newLongitude == oldLongitude) {
+        alert("Координаты не изменились. Обновление не требуется.");
+        closeBinInfo();
+        return; // Прерываем выполнение функции
     }
     
     fetch(`/api/bins/${binId}`, {
@@ -328,6 +416,33 @@ function updateBinLocation(binId) {
         alert('Произошла ошибка при обновлении');
     });
     }
+    
+
+function binEmptied(binId, flagRoute) {
+
+    fetch(`/api/bins/${binId}/on_route`, {
+        method: 'PUT',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+        on_route: flagRoute
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message); // Вывод сообщения с сервера
+        // ... Обработка ответа от сервера ...
+    
+        // Обновляем данные на карте
+        updateMapData();
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка при обновлении');
+    });
+    }
+
 
 function closeBinInfo() {
     myMap.balloon.close();
@@ -353,9 +468,10 @@ function openSensorListModal() {
     loadSensorList(); 
   }
 
-  function closeSensorListModal() {
+function closeSensorListModal() {
+    document.getElementById('sensorSearch').value = '';
     document.getElementById('sensorListModal').style.display = 'none';
-  }
+}
 
   function loadSensorList() {
     fetch('/api/bins')

@@ -18,14 +18,22 @@ app.use(session({
   saveUninitialized: false
 }));
 
+// Проверка авторизации для доступа к специальным функциям
+const isLoggedIn = (req, res, next) => {
+  if (!req.session.username) {
+    return res.redirect('/'); 
+  }
+  next();
+};
+
 
 // Настройки подключения к базе данных
 const dbConfig1 = {
-  host: '79.174.88.28',
-  user: 'user1',
-  port: '17576',
-  password: 'exte`dfZXQd7AmeH/3zeFcCP',
-  database: 'user1'
+  host: '79.174.88.253',
+  user: 'Daniil',
+  port: '15552',
+  password: 'Primera12.',
+  database: 'trash_bins'
 };
 
 const dbConfig = {
@@ -37,7 +45,7 @@ const dbConfig = {
 };
 
 // Создание подключения к базе данных
-const connection = mysql.createConnection(dbConfig);
+const connection = mysql.createConnection(dbConfig1);
 
 // Обработка ошибок подключения
 connection.connect(error => {
@@ -57,7 +65,7 @@ app.get('/', (req, res) => {
 });
 
 // API endpoint для получения данных о мусорных баках
-app.get('/api/bins', (req, res) => {
+app.get('/api/bins', isLoggedIn, (req, res) => {
   const query = 'SELECT * FROM bins';
   connection.query(query, (error, results) => {
     if (error) {
@@ -103,19 +111,10 @@ app.post('/login', async (req, res) => {
   });
 });
 
-// Проверка авторизации для доступа к специальным функциям
-const isLoggedIn = (req, res, next) => {
-  if (!req.session.username) {
-    return res.redirect('/'); 
-  }
-  next();
-};
-
-
 // Защита специальных функций проверкой авторизации
 app.get('/map', isLoggedIn, (req, res) => {
   
-  res.sendFile(__dirname + '/newMap.html');
+  res.sendFile(__dirname + '/map.html');
 });
 
 // Новый маршрут для проверки авторизации
@@ -129,21 +128,36 @@ app.get('/isLoggedIn', (req, res) => {
 
 
 /////////////
-app.post('/api/bins', (req, res) => {
+app.post('/api/bins', isLoggedIn, (req, res) => {
   const { latitude, longitude, serialNumber, fullness, chargeLevel } = req.body;
-  const query = `INSERT INTO bins (latitude, longitude, serial_number, fullness, chargeLevel) VALUES (?, ?, ?, ?, ?)`;
-  connection.query(query, [latitude, longitude, serialNumber, fullness, chargeLevel], (error, results) => {
-    if (error) {
-      console.error('Ошибка добавления данных в базу данных: ' + error.stack);
-      res.status(500).json({ error: 'Ошибка сервера' });
-      return;
+
+  // Проверка существования серийного номера
+  const checkQuery = `SELECT 1 FROM bins WHERE serial_number = ?`;
+  connection.query(checkQuery, [serialNumber], (checkError, checkResults) => {
+    if (checkError) {
+      console.error('Ошибка проверки серийного номера:', checkError);
+      return res.status(500).json({ error: 'Ошибка сервера' });
     }
-    res.status(201).json({ message: 'Данные успешно добавлены', id: results.insertId }); // Возвращаем ID новой записи
+
+    if (checkResults.length > 0) {
+      // Серийный номер уже существует
+      return res.status(400).json({ error: 'Датчик с таким серийным номером уже существует' });
+    }
+
+    // Если серийный номер уникален, добавляем датчик
+    const insertQuery = `INSERT INTO bins (latitude, longitude, serial_number, fullness, chargeLevel) VALUES (?, ?, ?, ?, ?)`;
+    connection.query(insertQuery, [latitude, longitude, serialNumber, fullness, chargeLevel], (insertError, insertResults) => {
+      if (insertError) {
+        console.error('Ошибка добавления данных:', insertError);
+        return res.status(500).json({ error: 'Ошибка сервера' });
+      }
+      res.status(201).json({ message: 'Данные успешно добавлены', id: insertResults.insertId });
+    });
   });
 });
 //////////ОБНОВЛЕНИЕ МЕСТОПОЛОЖЕНИЯ
 
-app.get('/api/bins/:id', (req, res) => {
+app.get('/api/bins/:id', isLoggedIn, (req, res) => {
   const binId = req.params.id;
 
   const sql = `SELECT * FROM bins WHERE id = ?`;
@@ -162,7 +176,7 @@ app.get('/api/bins/:id', (req, res) => {
 });
 
 
-app.put('/api/bins/:id', (req, res) => {
+app.put('/api/bins/:id', isLoggedIn, (req, res) => {
   const binId = req.params.id;
   const { latitude, longitude } = req.body;
 
@@ -183,7 +197,42 @@ app.put('/api/bins/:id', (req, res) => {
     res.json({ message: 'Местоположение обновлено' });
   });
 });
-/////////
+/////////МАРШРУТ/////////////
+app.get('/api/bins/:id/on_route', isLoggedIn, (req, res) => {
+  const binId = req.params.id;
+
+  const sql = `SELECT * FROM bins WHERE id = ?`;
+  connection.query(sql, [binId], (err, result) => {
+    if (err) {
+      console.error('Ошибка получения данных:', err);
+      return res.status(500).json({ message: 'Ошибка сервера' });
+    }
+
+    if (result.length === 0) {
+      return res.status(404).json({ message: 'Контейнер не найден' });
+    }
+
+    res.json(result[0]); // Возвращаем найденный контейнер
+  });
+});
+
+app.put('/api/bins/:id/on_route', isLoggedIn, (req, res) => {
+  const binId = req.params.id;
+  const { on_route } = req.body;
+
+  const sql = `UPDATE bins SET on_route = ? WHERE id = ?`;
+  connection.query(sql, [on_route, binId], (err, result) => {
+    if (err) {
+      console.error('Ошибка обновления данных:', err);
+      return res.status(500).json({ message: 'Ошибка сервера' });
+    }
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Контейнер не найден' });
+    }
+    res.json({ message: 'Местоположение обновлено' });
+  });
+});
+////////////
 
 app.listen(port, hostname, () => {
   console.log('Server running');

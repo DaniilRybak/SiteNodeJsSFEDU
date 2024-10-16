@@ -327,3 +327,10 @@ a {
   color: #333; /* Темно-серый цвет ссылок */
   text-decoration: none; /* Убираем подчеркивание ссылок */
 }
+
+/*МАРШРУТ ПОДТВЕРЖЕНИЕ*/
+.modal-content-routes{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

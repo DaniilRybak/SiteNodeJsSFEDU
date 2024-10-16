@@ -6,6 +6,7 @@ function closeAddSensorModal() {
     document.getElementById('addSensorModal').style.display = 'none';
 }
 
+
 document.getElementById('addSensorForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -50,17 +51,16 @@ document.getElementById('addSensorForm').addEventListener('submit', function(eve
     .then(data => {
         console.log('Sensor added:', data);
         closeAddSensorModal();
-
-        // Обновление карты после добавления маркера
         updateMapData(); 
 
-        // Дополнительные действия (необязательно):
-        // - Очистить форму
-        // - Вывести сообщение об успешном добавлении
+        document.getElementById('latitude').value = '';
+        document.getElementById('longitude').value = '';
+        document.getElementById('serialNumber').value = '';
+        document.getElementById('sensorCode').value = '';
     })
     .catch(error => {
         console.error('Error adding sensor:', error);
-        alert('Ошибка добавления датчика. Пожалуйста, попробуйте еще раз.');
+        alert("Датчик с таким серийным номером уже существует");
     });
 });
 
@@ -85,11 +85,15 @@ function validateCoordinates(latitude, longitude) {
   }
 
 const modal = document.getElementById('addSensorModal');
+const sensorListModal = document.getElementById('sensorListModal');
 
 // Обработчик клика на все окно (включая область за модальным окном)
 window.onclick = function(event) {
     // Проверяем, клик был по самому модальному окну или нет
     if (event.target == modal) {
         closeAddSensorModal();
+    }
+    else if (event.target == sensorListModal) {
+        closeSensorListModal(); 
     }
 }
