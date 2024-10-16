@@ -7,6 +7,7 @@ const session = require('express-session');
 
 const secretKey = crypto.randomBytes(64).toString('hex');
 
+const hostname = '0.0.0.0';
 const port = 3000; // Замените на желаемый порт
 
 // Настройка сессии
@@ -233,6 +234,6 @@ app.put('/api/bins/:id/on_route', isLoggedIn, (req, res) => {
 });
 ////////////
 
-app.listen(port, () => {
+app.listen(port, hostname, () => {
   console.log('Server running');
 });
