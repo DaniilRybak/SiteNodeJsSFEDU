@@ -205,6 +205,22 @@ nav a {
     background-color: #45a049; /* Более темный зеленый при наведении */
 }
 
+#contacts h2 {
+    animation: fadeIn 1s ease-in-out; /* Анимация fadeIn длительностью 1 секунду */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  #contacts {
+    min-height: 517px; /* Или другое значение, достаточное для обеих секций */
+  }
 /*Подвал*/
 
 footer {
@@ -419,3 +435,15 @@ nav li {
 
 
 }
+
+.eco {
+    color: black; /* Черный цвет для "Eco" */
+  }
+  
+  .o {
+    color: black; /* Черный цвет для "o" внутри "Eco" */
+  }
+  
+  .b {
+    color: darkgreen; /* Темно-зеленый цвет для "B" */
+  }

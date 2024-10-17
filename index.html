@@ -25,7 +25,9 @@
 </header>
  <section class="about">
         <div class="about-text">
-            <h1>EcoTechBin</h1>
+            <h1>
+                <span class="eco">Ec<span class="o">o</span></span>Tech<span class="b">B</span>in
+              </h1>
             <p>Мы делаем датчики наполняемости мусорных контейнеров.</p>
         </div>
         <div class="about-image">
@@ -121,6 +123,7 @@
     
 
     <section id="contacts" class="contacts" data-aos="fade-up">
+        <div id="contact1">
         <h2>Форма обратной связи</h2>
         <form id="contact-form">
           <div class="form-group">
@@ -137,6 +140,7 @@
           </div>
             <button type="submit">Отправить</button>
         </form>
+        </div>
     </section>
 
     <footer>
@@ -181,6 +185,31 @@
 
     <script>
         AOS.init();
+     </script>
+
+     <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const contactsSection = document.getElementById('contacts');
+        const originalHeight = contactsSection.offsetHeight;
+
+        contactsSection.innerHTML = '';
+
+        const successMessage = document.createElement('h2');
+        successMessage.textContent = 'Ваше обращение отправлено!';
+        successMessage.style.textAlign = 'center';
+
+        const wrapper = document.createElement('div');
+        wrapper.style.display = 'flex';
+        wrapper.style.justifyContent = 'center'; 
+        wrapper.style.alignItems = 'center';   
+        wrapper.style.height = '517px';
+
+        wrapper.appendChild(successMessage);
+        contactsSection.appendChild(wrapper);
+        contactsSection.classList.add('show-message');
+    });
      </script>
 </body>
 </html>
