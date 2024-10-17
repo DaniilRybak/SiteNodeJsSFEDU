@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('mysql2');
 const crypto = require('crypto');
 const session = require('express-session');
+const winston = require('winston');
 
 
 const secretKey = crypto.randomBytes(64).toString('hex');
@@ -25,6 +26,20 @@ const isLoggedIn = (req, res, next) => {
   }
   next();
 };
+
+const logger = winston.createLogger({
+  level: 'info', // минимальный уровень логирования
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ level, message, timestamp }) => {
+      return `${timestamp} ${level}: ${message}`;
+    })
+  ),
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }), // логи ошибок в error.log
+    new winston.transports.File({ filename: 'combined.log' }), // все логи в combined.log
+  ],
+});
 
 
 // Настройки подключения к базе данных
@@ -95,12 +110,8 @@ app.post('/login', async (req, res) => {
       return;
     }
 
-    if (results.length === 0) {
-      res.status(402).json({ error: 'Неверный логин или пароль' });
-      return;
-    }
-
-    if (password != results[0].password) {
+    if (results.length === 0 || password != results[0].password) {
+      logger.error(`Неудачная попытка входа: ${req.ip} - ${username}`);
       res.status(401).json({ error: 'Неверный логин или пароль' });
       return;
     }
