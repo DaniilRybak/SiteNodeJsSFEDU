@@ -61,7 +61,7 @@ nav a {
 }
 
 .about-image img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
 }
 
@@ -336,6 +336,7 @@ footer {
 @media (max-width: 768px) { /* На мобильных */
     .sensor-details-container {
         flex-direction: column; /* Картинка и описание друг под другом */
+        gap: 0; 
     }
 
     .sensor-image, .sensor-description {
@@ -356,7 +357,6 @@ footer {
     .sensor-description h2{
         text-align: center;
     }
-
 }
 
 @media (min-width: 769px) { /* На мобильных */
