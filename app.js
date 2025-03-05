@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'dresgeorg539@gmail.com',
-    pass: 'Primera12'
+    pass: 'NO'
   }
 });
 
@@ -49,8 +49,8 @@ const logger = winston.createLogger({
 const dbConfig1 = {
   host: '79.174.88.253',
   user: 'Daniil',
-  port: '15552',
-  password: 'Primera12.',
+  port: 'NO',
+  password: 'NO',
   database: 'trash_bins',
   waitForConnections: true,
   connectionLimit: 10,
